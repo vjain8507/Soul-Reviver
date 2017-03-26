@@ -3117,3 +3117,63 @@ i.red {
 .img-preview {
     max-width: 100%;
 }
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px dotted #000000;
+    margin: 1em 0;
+    padding: 0;
+}
+.coment-form h4 {
+    padding: 0px;
+    margin: 0px;
+}
+.response h4 {
+    padding: 0px;
+    margin: 0px;
+}
+.coment-data {
+    width: 100%;
+}
+.coment-data td{
+    padding: 10px;
+}
+.coment-data input[type="text"] {
+    width: 100%;
+    border: 1px solid #000000;
+    padding: 5px;
+}
+.coment-data input[type="email"] {
+    width: 100%;
+    border: 1px solid #000000;
+    padding: 5px;
+}
+.coment-data textarea{
+    width: 100%;
+    resize: none;
+    border: 1px solid #000000;
+    padding: 5px;
+}
+.coment-data input[type="submit"] {
+    background-color: #0a83df;
+    color: #FFFFFF;
+    width: 100%;
+    border: 1px solid #0a83df;
+}
+.panel-default{
+    border: 1px solid #000000;
+    border-radius: 0 !important;
+}
+.panel-default > .panel-heading {
+    color: #FFFFFF;
+    background-color: #555555;
+    border-color: #000000;
+    border-radius: 0 !important;
+    text-align: center;
+}
+.panel-default > .panel-body {
+    color: #333;
+    background-color: #CCCCCC;
+    border-radius: 0 !important;
+}
