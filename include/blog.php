@@ -1,5 +1,7 @@
 <div class="blog">
-    <div class="who"><h1 class="title"><span>BLOG</span></h1></div>
+    <div class="who">
+        <h1 class="title"><span>BLOG</span></h1>
+    </div>
     <div class="container">
         <?php
             include("include/connect.php");
@@ -96,41 +98,19 @@
             }
             else
             {
-                $page1=0;
-                $page=0;
-                if(isset($_GET['page']))
-                {
-                    $page = $_GET['page'];
-                    if($page!="1")
-                        $page1=($page*5)-5;
+                $results_per_page = 1;
+                $sql='SELECT * FROM post';
+                $result = mysqli_query($con, $sql);
+                $number_of_results = mysqli_num_rows($result);
+                $number_of_pages = ceil($number_of_results/$results_per_page);
+                if (!isset($_GET['page'])) {
+                  $page = 1;
+                } else {
+                  $page = $_GET['page'];
                 }
-                $select2 = "select * from post order by post_id desc";
-                $query2 = mysqli_query($con,$select2);
-                $cou = mysqli_num_rows($query2);
-                $a = $cou/5;
-                $a = ceil($a);
-                echo "<div class='col-md-8 blog-left'><nav style='text-align:center;'><ul class='pagination'>";
-                $ppage = $page-1;
-                $npage = $page+1;
-                if($page==0 OR $page==1)
-                    echo "<li class='disabled'><a><span>&laquo;</span></a></li><li class='disabled'><a>1</a></li>";
-                else
-                    echo "<li><a href='./?blog&page=$ppage' aria-label='Previous'><span>&laquo;</span></a></li><li><a href='./?blog&page=1'>1</a></li>";
-                for($b=2;$b<=$a;$b++)
-                {
-                    if($page==$b)
-                        echo "<li class='disabled'><a>$b</a></li>";
-                    else
-                        echo "<li><a href='./?blog&page=$b'>$b</a></li>";
-                }
-                if($page==$a)
-                    echo "<li class='disabled'><a aria-label='Next'><span>&raquo;</span></a></li>";
-                else if($page==0)
-                    echo "<li><a href='./?blog&page=2' aria-label='Next'><span>&raquo;</span></a></li>";
-                else
-                    echo "<li><a href='./?blog&page=$npage' aria-label='Next'><span>&raquo;</span></a></li>";
-                echo "</ul></nav>";
-                $get_posts = "select * from post order by post_id desc limit $page1,5";
+                $this_page_first_result = ($page-1)*$results_per_page;
+                echo "<div class='col-md-8 blog-left'>";
+                $get_posts = "select * from post order by post_id desc LIMIT $this_page_first_result,$results_per_page";
                 $run_posts = mysqli_query($con,$get_posts);
                 while($row_post = mysqli_fetch_array($run_posts))
                 {
@@ -142,6 +122,9 @@
                     $post_image = $row_post['post_image'];
                     $post_content = word_count($row_post['post_data'],50);
                     echo "<div class='blog-info'><h4 style='text-align:center;margin:0px;'><a href='./?blog&p=$post_id'>$post_title</a></h4><p style='text-align:center;'><b>Posted By</b> $post_author <b>On</b> $post_date <a href='#'>Comments (0)</a></p><div class='blog-info-text'><div class='blog-img' style='text-align:center;'><img src='./image/post_image/$post_image' style='height:200px;padding-bottom:20px;' alt='$post_image'/></a></div><p class='snglp' style='text-align:justify;'>$post_content</p><a href='./?blog&p=$post_id' class='btn btn-primary'>Read More</a></div></div>";
+                }
+                for ($page=1;$page<=$number_of_pages;$page++) {
+                  echo '<a href="./?blog&page=' . $page . '">' . $page . '</a> ';
                 }
                 echo "</div><div class='col-md-4 single-page-right'><div class='category blog-ctgry'><h4>Categories</h4><div class='list-group'>";
                 $get_cat = "select * from cat";
@@ -155,5 +138,5 @@
                 echo "</div></div></div><div class='clearfix'></div>";
             }
         ?>
-    </div>	
+    </div>
 </div>

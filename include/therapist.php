@@ -1,7 +1,12 @@
 <?php include("include/connect.php"); ?>
 <div class="container">
     <?php
-        if(isset($_GET['c']) && isset($_GET['p']))
+        if(!isset($_SESSION['username']))
+        {
+            echo "<div id='tabs' class='tabs'><div class='who'><h1 class='title'><span>Find Therapist</span></h1></div></div>";
+            echo "<p class='tabd'><a href='./?signin'>Sign In</a> Or <a href='./?signup'>Sign Up</a> To Continue.</p>";
+        }
+        else if(isset($_GET['c']) && isset($_GET['p']))
         {
             $city = $_GET['c'];
             $position = $_GET['p'];

@@ -7,19 +7,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="./"><img src="image/others/logo.png" alt="soul-reviver-logo"></a> 
+            <a class="navbar-brand logo" href="./"><img src="image/others/logo.png" alt="soul-reviver-logo"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right custom_nav mobnav" id="top-menu">
                 <li class="active"><a href="./">HOME</a></li>
                 <li><a href="./?about">ABOUT US </a></li>
                 <li><a href="./?team">OUR TEAM</a></li>
+                <li><a href="./?therapist">THERAPIST</a></li>
                 <li><a href="./?blog">BLOG</a></li>
                 <li><a href="./?contact">CONTACT US</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">More</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./?therapist">THERAPIST</a></li>
                         <li><a href="./?ttopics">TRENDING TOPICS</a></li>
                         <li><a href="./?nevents">NEWS & EVENTS</a></li>
                         <li><a href="./?study">STUDY CENTER</a></li>

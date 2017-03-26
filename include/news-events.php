@@ -4,7 +4,7 @@
     $run_event = mysqli_query($con,$get_event);
     if(mysqli_num_rows($run_event) > 0)
     {
-        echo "<section style='margin-bottom:50px;'><div class='sp'><h1 class='title'><span>News & Events</span></h1></div><div class='container'><div class='row'>";
+        echo "<section style='margin-bottom:50px;'><div class='sp who container'><h1 class='title'><span>News & Events</span></h1></div><div class='container'><div class='row'>";
         while($row_event = mysqli_fetch_array($run_event))
         {
             $event_id = $row_event['event_id'];
