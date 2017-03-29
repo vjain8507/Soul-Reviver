@@ -2,11 +2,13 @@
     include("include/connect.php");
 	session_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
+
     <head>
-          <?php include("./include/css.php"); ?>
+        <?php include("./include/css.php"); ?>
     </head>
+
     <body>
         <?php include("./include/header.php"); ?>
         <?php
@@ -66,6 +68,10 @@
             {
                 include("include/logout.php");
             }
+            else if(isset($_GET['confirm']))
+            {
+                include("include/confirm.php");
+            }
             else
             {
                 
@@ -76,6 +82,7 @@
                 include("include/ad.php");
             }
         ?>
-        <?php include("include/footer.php"); ?>
+            <?php include("include/footer.php"); ?>
     </body>
-</html>
+
+    </html>

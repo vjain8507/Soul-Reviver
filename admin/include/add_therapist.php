@@ -20,7 +20,7 @@
                         ?>
                     </select>
                     <label class="mdl-selectfield__label" for="city"></label>
-              </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
                         ?>
                     </select>
                     <label class="mdl-selectfield__label" for="position"></label>
-              </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -95,8 +95,8 @@
                 </div>
             </td>
         </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_therapist">Add</button></td>
+        <tr style="text-align:center;">
+            <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_therapist">Add</button></td>
         </tr>
     </table>
 </form>
@@ -106,12 +106,13 @@
         $city_name = $_POST['city'];
         $position_name = $_POST['position'];
         $name = $_POST['name'];
-        $image = $_FILES['image']['name'];
+        $info = pathinfo($_FILES['image']['name']);
+        $ext = $info['extension'];
 		$image_tmp = $_FILES['image']['tmp_name'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
         $experience = $_POST['experience'];
-		if($city_name=='' OR $position_name=='' OR $name=='' OR $image=='' OR $email=='' OR $mobile=='' OR $experience=='')
+		if($city_name=='' OR $position_name=='' OR $name=='' OR $email=='' OR $mobile=='' OR $experience=='')
 		{
 			echo "<script>alert('Please Fill All The Fields')</script>";
 			exit();
@@ -122,9 +123,14 @@
             $city_id = $city['city_id'];
             $position = mysqli_fetch_array(mysqli_query($con,"select position_id from position_old where position_name='$position_name'"));
             $position_id = $position['position_id'];
-            move_uploaded_file($image_tmp,"../../image/therapist/$image");
-			$insert_therapist = "insert into therapist (city_id,city_name,position_id,position_name,name,image,email,mobile,experience) values ('$city_id','$city_name','$position_id','$position_name','$name','$image','$email','$mobile','$experience')";
-			$run_therapist = mysqli_query($con,$insert_therapist);
+            $insert_therapist = "insert into therapist (city_id,city_name,position_id,position_name,name,email,mobile,experience) values ('$city_id','$city_name','$position_id','$position_name','$name','$email','$mobile','$experience')";
+			mysqli_query($con,$insert_therapist);
+            $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT id FROM therapist ORDER BY id DESC LIMIT 1"));
+            $get_sno = $last_sno['id'];
+            $newname = "$get_sno.$ext";
+            move_uploaded_file($image_tmp,"../../image/therapist/$newname");
+			$update_therapist = "update therapist set image='$newname' where id='$get_sno'";
+			mysqli_query($con,$update_therapist);
 			echo "<script>alert('Therapist Has Been Added Successfully')</script>";
 			echo "<script>window.open('./home.php?therapist','_self')</script>";
 		}

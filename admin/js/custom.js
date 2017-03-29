@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $('#cpassword').on('keyup',function(){
+        if($(this).val()==$('#password').val()){
+            $('#checkp').addClass('mdl-button--accent');
+        }
+        else
+            $('#checkp').removeClass('mdl-button--accent');
+    });
+});

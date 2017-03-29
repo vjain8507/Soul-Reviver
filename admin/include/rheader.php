@@ -16,7 +16,5 @@
 <link rel="stylesheet" href="../css/material.indigo-red.min.css">
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../select/dist/mdl-selectfield.min.css">
-<script src="../js/material.min.js"></script>
-<script src="../js/custom.js"></script>
 <script src="../tinymce/tinymce.min.js"></script>
-<script src="../select/dist/mdl-selectfield.min.js"></script>
+<title>Soul Reviver, Udaipur</title>

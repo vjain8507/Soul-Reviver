@@ -208,10 +208,14 @@
             }
             else
             {
+                include("include/mail.php");
+                $log_key=$log_name.$log_email.$log_gender.date('F d, Y h:i:s A');
+                $log_key=md5($log_key);
                 move_uploaded_file($log_image_tmp,"image/users/$newname");
-                $insert_log = "insert into login (log_image,log_name,log_gender,log_email,log_mobile,log_address,log_city,log_state,log_zip,log_username,log_password,log_plan) values ('$newname','$log_name','$log_gender','$log_email','$log_mobile','$log_address','$log_city','$log_state','$log_zip','$log_email','$log_password','$log_plan')";
+                $insert_log = "insert into login (log_image,log_name,log_gender,log_email,log_mobile,log_address,log_city,log_state,log_zip,log_username,log_password,log_plan,log_key,log_approve) values ('$newname','$log_name','$log_gender','$log_email','$log_mobile','$log_address','$log_city','$log_state','$log_zip','$log_email','$log_password','$log_plan','$log_key','no')";
                 $run_log = mysqli_query($con,$insert_log);
-                echo "<script>alert('Registration Complete!!!')</script>";
+                send_to_register($log_name,$log_email,$log_key);
+                echo "<script>alert('Registration Complete, Check Your Mail To Confirm.')</script>";
                 echo "<script>window.open('./?signin','_self')</script>";
             }
 		}

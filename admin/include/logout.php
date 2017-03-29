@@ -1,4 +1,5 @@
 <?php  
 	session_destroy();
-	header("Location: ./home.php");
+    echo "<script>alert('Logout Successful')</script>";
+    echo "<script>window.open('../','_self')</script>";
 ?>

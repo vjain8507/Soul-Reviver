@@ -24,7 +24,7 @@
                 $email = $row_therapist['email'];
                 $mobile = $row_therapist['mobile'];
                 $experience = $row_therapist['experience'];
-                echo "<div class='col-xs-12 col-sm-6 col-md-6'><div class='well well-sm'><div class='row'><div class='col-sm-6 col-md-4'><img src='image/therapist/$image' alt='' class='img-rounded img-responsive'/></div><div class='col-sm-6 col-md-8'><h4>$name</h4><small>Online Fee: Rs. 500</small><small>Offline Fee: Rs. 1000</small><p><strong>Email: </strong>$email</p><p><strong>Mobile: </strong>+91-$mobile</p><p><strong>Experiance: </strong>$experience</p><div class='btn-group'><button type='button' class='btn btn-primary'>Pay Online</button><button type='button' class='btn btn-primary'>Video Call</button></div></div></div></div></div>";
+                echo "<div class='col-xs-12 col-sm-6 col-md-6'><div class='well well-sm'><div class='row'><div class='col-sm-6 col-md-4'><img src='image/therapist/$image' alt='' class='img-rounded img-responsive'/></div><div class='col-sm-6 col-md-8'><h4>$name</h4><p><strong>Email: </strong>$email</p><p><strong>Mobile: </strong>+91-$mobile</p><p><strong>Experiance: </strong>$experience</p><div class='btn-group'><button type='button' class='btn btn-primary'>Video Call</button></div></div></div></div></div>";
             }
             echo "</div>";
         }

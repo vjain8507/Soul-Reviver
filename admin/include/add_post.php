@@ -22,7 +22,7 @@
                         ?>
                     </select>
                     <label class="mdl-selectfield__label" for="category"></label>
-              </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
             </td>
             <td>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea name="title" class="mdl-textfield__input" rows="2" type="text" id="title" ></textarea>
+                    <textarea name="title" class="mdl-textfield__input" rows="2" type="text" id="title"></textarea>
                 </div>
             </td>
         </tr>
@@ -41,7 +41,7 @@
             </td>
             <td>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea name="author" class="mdl-textfield__input" rows="2" type="text" id="author" ></textarea>
+                    <textarea name="author" class="mdl-textfield__input" rows="2" type="text" id="author"></textarea>
                 </div>
             </td>
         </tr>
@@ -63,8 +63,8 @@
                 <textarea name="content" rows="2" type="text" id="content"></textarea>
             </td>
         </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_post">Add</button></td>
+        <tr style="text-align:center;">
+            <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_post">Add</button></td>
         </tr>
     </table>
 </form>
@@ -75,19 +75,27 @@
         $post_title = $_POST['title'];
         $post_date = (string)date('F j, Y');
         $post_author = $_POST['author'];
-        $post_image = $_FILES['image']['name'];
+        $info = pathinfo($_FILES['image']['name']);
+        $ext = $info['extension'];
 		$post_image_tmp = $_FILES['image']['tmp_name'];
         $post_data = $_POST['content'];
-		if($cat_name=='' OR $post_title=='' OR $post_author=='' OR $post_image==''OR $post_data=='')
+		if($cat_name=='' OR $post_title=='' OR $post_author=='' OR $post_data=='')
 		{
 			echo "<script>alert('Please Fill All The Fields')</script>";
 			exit();
 		}
 		else
 		{
-            move_uploaded_file($post_image_tmp,"../../image/post_image/$post_image");
-			$insert_post = "insert into post (cat_name,post_title,post_image,post_data,post_author,post_date) values ('$cat_name','$post_title','$post_image','$post_data','$post_author','$post_date')";
-			$run_post = mysqli_query($con,$insert_post);
+            $cat = mysqli_fetch_array(mysqli_query($con,"select cat_id from cat where cat_name='$cat_name'"));
+            $cat_id = $cat['cat_id'];
+            $insert_post = "insert into post (cat_id,cat_name,post_title,post_data,post_author,post_date) values ('$cat_id','$cat_name','$post_title','$post_data','$post_author','$post_date')";
+			mysqli_query($con,$insert_post);
+            $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT post_id FROM post ORDER BY post_id DESC LIMIT 1"));
+            $get_sno = $last_sno['post_id'];
+            $newname = "$get_sno.$ext";
+            move_uploaded_file($post_image_tmp,"../../image/post/$newname");
+			$update_post = "update post set post_image='$newname' where post_id='$get_sno'";
+			mysqli_query($con,$update_post);
 			echo "<script>alert('Post Has Been Added Successfully')</script>";
 			echo "<script>window.open('./home.php?post','_self')</script>";
 		}

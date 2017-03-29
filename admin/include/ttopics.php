@@ -27,16 +27,7 @@
                 $author = $row_topic['author'];
                 $date = $row_topic['date'];
                 $content = $row_topic['content'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$heading</td>
-                <td><img src='../../image/ttopics/$image' height='100px' width='100px'></td>
-                <td>$author</td>
-                <td>$date</td>
-                <td>$content</td>
-                <td><a href='./home.php?edit_topic&ev=$sno'><i class='material-icons'>mode_edit</i></a></td>
-                <td><a href='./home.php?delete_topic&de=$sno'><i class='material-icons'>delete_forever</i></a></td>
-                </tr>";
+                echo "<tr><td>".$i++."</td><td>$heading</td><td><img src='../../image/ttopics/$image' height='100px' width='100px'></td><td>$author</td><td>$date</td><td>$content</td><td><a href='./home.php?edit_topic&ev=$sno'><i class='material-icons'>mode_edit</i></a></td><td><a href='./home.php?delete_topic&de=$sno'><i class='material-icons'>delete_forever</i></a></td></tr>";
             }
         ?>
     </tbody>

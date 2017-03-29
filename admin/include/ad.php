@@ -19,10 +19,16 @@
             {
                 $ad_id = $row_ad['ad_id'];
                 $ad_image = $row_ad['ad_image'];
+                $ad_status = $row_ad['ad_status'];
                 echo "<tr>
                 <td>".$i++."</td>
                 <td><img src='../../image/ads/$ad_image' width='200px'></td>
-                <td><a href='./home.php?set_ad&id=$ad_id'><i class='material-icons'>done_all</i></a></td>
+                <td>";
+                    if($ad_status=='1')
+                        echo "<a href='./home.php?set_ad&id=$ad_id'><i class='material-icons'>done_all</i></a>";
+                    else
+                        echo "<a href='./home.php?set_ad&id=$ad_id'><i class='material-icons'>done</i></a>";
+                echo "</td>
                 <td><a href='./home.php?delete_ad&de=$ad_id'><i class='material-icons'>delete_forever</i></a></td>
                 </tr>";
             }

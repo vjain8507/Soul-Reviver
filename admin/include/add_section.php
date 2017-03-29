@@ -6,12 +6,12 @@
             </td>
             <td>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea name="section" class="mdl-textfield__input" rows="2" type="text" id="section" ></textarea>
+                    <textarea name="section" class="mdl-textfield__input" rows="2" type="text" id="section"></textarea>
                 </div>
             </td>
         </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_section">Add</button></td>
+        <tr style="text-align:center;">
+            <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_section">Add</button></td>
         </tr>
     </table>
 </form>

@@ -31,18 +31,7 @@
                 $event_venue = $row_event['event_venue'];
                 $event_cord = $row_event['event_cord'];
                 $event_detail = $row_event['event_detail'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$event_title</td>
-                <td><img src='../../image/news-events/$event_image' height='100px' width='100px'></td>
-                <td>$event_date</td>
-                <td>$event_time</td>
-                <td>$event_venue</td>
-                <td>$event_cord</td>
-                <td>$event_detail</td>
-                <td><a href='./home.php?edit_event&ev=$event_id'><i class='material-icons'>mode_edit</i></a></td>
-                <td><a href='./home.php?delete_event&de=$event_id'><i class='material-icons'>delete_forever</i></a></td>
-                </tr>";
+                echo "<tr><td>".$i++."</td><td>$event_title</td><td><img src='../../image/nevents/$event_image' height='100px' width='100px'></td><td>$event_date</td><td>$event_time</td><td>$event_venue</td><td>$event_cord</td><td>$event_detail</td><td><a href='./home.php?edit_event&ev=$event_id'><i class='material-icons'>mode_edit</i></a></td><td><a href='./home.php?delete_event&de=$event_id'><i class='material-icons'>delete_forever</i></a></td></tr>";
             }
         ?>
     </tbody>

@@ -71,8 +71,8 @@
                 <textarea name="content" rows="2" type="text" id="content"></textarea>
             </td>
         </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_event">Add</button></td>
+        <tr style="text-align:center;">
+            <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_event">Add</button></td>
         </tr>
     </table>
 </form>
@@ -81,23 +81,29 @@
 	{
         include("connect.php");
         $event_title = $_POST['title'];
-        $event_image = $_FILES['image']['name'];
+        $info = pathinfo($_FILES['image']['name']);
+        $ext = $info['extension'];
 		$event_image_tmp = $_FILES['image']['tmp_name'];
         $event_date = (string)date('F d, Y', strtotime($_POST['date']));
         $event_time = (string)date('h:i A', strtotime($_POST['time']));
         $event_venue = $_POST['venue'];
         $event_cord = $_POST['cord'];
         $event_detail = $_POST['content'];
-		if($event_title=='' OR $event_image=='' OR $event_date=='' OR $event_time=='' OR $event_venue=='' OR $event_cord=='' OR $event_detail=='')
+		if($event_title=='' OR $event_date=='' OR $event_time=='' OR $event_venue=='' OR $event_cord=='' OR $event_detail=='')
 		{
 			echo "<script>alert('Please Fill All The Fields')</script>";
 			exit();
 		}
 		else
 		{
-            move_uploaded_file($event_image_tmp,"../../image/news-events/$event_image");
-			$insert_event = "insert into nevent (event_title,event_image,event_date,event_time,event_venue,event_cord,event_detail) values ('$event_title','$event_image','$event_date','$event_time','$event_venue','$event_cord','$event_detail')";
-			$run_event = mysqli_query($con,$insert_event);
+			$insert_event = "insert into nevent (event_title,event_date,event_time,event_venue,event_cord,event_detail) values ('$event_title','$event_date','$event_time','$event_venue','$event_cord','$event_detail')";
+			mysqli_query($con,$insert_event);
+            $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT event_id FROM nevent ORDER BY event_id DESC LIMIT 1"));
+            $get_sno = $last_sno['event_id'];
+            $newname = "$get_sno.$ext";
+            move_uploaded_file($event_image_tmp,"../../image/nevents/$newname");
+            $update_event = "update nevent set event_image='$newname' where event_id='$get_sno'";
+			mysqli_query($con,$update_event);
 			echo "<script>alert('News/Event Has Been Added Successfully')</script>";
 			echo "<script>window.open('./home.php?news-events','_self')</script>";
 		}

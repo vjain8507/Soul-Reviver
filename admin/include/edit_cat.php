@@ -12,24 +12,24 @@
         }
     }
 ?>
-<form action="./home.php?edit_cat&ev=<?php echo $cat_id; ?>" method="post" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>
-                <span>Category - </span>
-            </td>
-            <td>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <textarea name="category" class="mdl-textfield__input" rows="2" type="text" id="category"><?php echo $cat_name; ?></textarea>
-                </div>
-            </td>
-        </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="update_cat">Add</button></td>
-        </tr>
-    </table>
-</form>
-<?php
+    <form action="./home.php?edit_cat&ev=<?php echo $cat_id; ?>" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <span>Category - </span>
+                </td>
+                <td>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <textarea name="category" class="mdl-textfield__input" rows="2" type="text" id="category"><?php echo $cat_name; ?></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="update_cat">Add</button></td>
+            </tr>
+        </table>
+    </form>
+    <?php
 	if(isset($_POST['update_cat']))
 	{
 		$update_id = $_GET['ev'];

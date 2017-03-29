@@ -12,24 +12,24 @@
         }
     }
 ?>
-<form action="./home.php?edit_section&ev=<?php echo $section_id; ?>" method="post" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>
-                <span>Section - </span>
-            </td>
-            <td>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <textarea name="section" class="mdl-textfield__input" rows="2" type="text" id="section"><?php echo $section_name; ?></textarea>
-                </div>
-            </td>
-        </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="update_section">Add</button></td>
-        </tr>
-    </table>
-</form>
-<?php
+    <form action="./home.php?edit_section&ev=<?php echo $section_id; ?>" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <span>Section - </span>
+                </td>
+                <td>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <textarea name="section" class="mdl-textfield__input" rows="2" type="text" id="section"><?php echo $section_name; ?></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="update_section">Add</button></td>
+            </tr>
+        </table>
+    </form>
+    <?php
 	if(isset($_POST['update_section']))
 	{
 		$update_id = $_GET['ev'];

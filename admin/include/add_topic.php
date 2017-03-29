@@ -50,8 +50,8 @@
                 <textarea name="content" rows="2" type="text" id="content"></textarea>
             </td>
         </tr>
-        <tr colspan="2" style="text-align:center;">
-            <td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_topic">Add</button></td>
+        <tr style="text-align:center;">
+            <td colspan="2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="add_topic">Add</button></td>
         </tr>
     </table>
 </form>
@@ -60,21 +60,27 @@
 	{
         include("connect.php");
         $heading = $_POST['title'];
-        $image = $_FILES['image']['name'];
+        $info = pathinfo($_FILES['image']['name']);
+        $ext = $info['extension'];
 		$image_tmp = $_FILES['image']['tmp_name'];
         $author = $_POST['author'];
         $date = (string)date('F d, Y', strtotime($_POST['date']));
         $content = $_POST['content'];
-		if($heading=='' OR $image=='' OR $author=='' OR $date==''OR $content=='')
+		if($heading=='' OR $info=='' OR $author=='' OR $date==''OR $content=='')
 		{
 			echo "<script>alert('Please Fill All The Fields')</script>";
 			exit();
 		}
 		else
 		{
-            move_uploaded_file($image_tmp,"../../image/ttopics/$image");
-			$insert_topic = "insert into ttopic (heading,image,author,date,content) values ('$heading','$image','$author','$date','$content')";
-			$run_topic = mysqli_query($con,$insert_topic);
+			$insert_topic = "insert into ttopic (heading,author,date,content) values ('$heading','$author','$date','$content')";
+			mysqli_query($con,$insert_topic);
+            $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT sno FROM ttopic ORDER BY sno DESC LIMIT 1"));
+            $get_sno = $last_sno['sno'];
+            $newname = "$get_sno.$ext";
+            move_uploaded_file($image_tmp,"../../image/ttopics/$newname");
+            $update_topic = "update ttopic set image='$newname' where sno='$get_sno'";
+			mysqli_query($con,$update_topic);
 			echo "<script>alert('Topic Has Been Added Successfully')</script>";
 			echo "<script>window.open('./home.php?ttopics','_self')</script>";
 		}

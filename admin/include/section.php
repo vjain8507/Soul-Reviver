@@ -19,12 +19,7 @@
             {
                 $section_id = $row_section['section_id'];
                 $section_name = $row_section['section_name'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$section_name</td>
-                <td><a href='./home.php?edit_section&ev=$section_id'><i class='material-icons'>mode_edit</i></a></td>
-                <td><a href='./home.php?delete_section&de=$section_id'><i class='material-icons'>delete_forever</i></a></td>
-                </tr>";
+                echo "<tr><td>".$i++."</td><td>$section_name</td><td><a href='./home.php?edit_section&ev=$section_id'><i class='material-icons'>mode_edit</i></a></td><td><a href='./home.php?delete_section&de=$section_id'><i class='material-icons'>delete_forever</i></a></td></tr>";
             }
         ?>
     </tbody>

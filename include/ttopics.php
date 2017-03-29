@@ -3,7 +3,7 @@
     include("include/functions.php");
     $get_topic = "select * from ttopic order by sno desc limit 4";
     $run_topic = mysqli_query($con,$get_topic);
-    if(mysqli_num_rows($run_topic) > 0)
+    if(mysqli_num_rows($run_topic) != 0)
     {
         echo "<section style='margin-bottom:50px;'><div class='sp who container'><h1 class='title'><span>Trending Topics</span></h1></div><div class='container'><div class='row'>";
         while($row_topic = mysqli_fetch_array($run_topic))

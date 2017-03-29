@@ -173,6 +173,9 @@
                                         <td><input name="cpassword" type="password" id="cpassword"></td>
                                     </tr>
                                     <tr>
+                                        <td colspan="2"><input name="email" type="hidden" value="<?php echo $log_email; ?>"></td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="2"><button name="submit" id="submit" type="submit" class="btn btn-info btn-block">SUBMIT</button></td>
                                     </tr>
                                 </table>
@@ -191,6 +194,7 @@
 		$log_name=$_POST['name'];
         $log_gender=$_POST['gender'];
         $log_mobile=$_POST['mobile'];
+        $log_email = $_POST['email'];
         $log_address=$_POST['address'];
         $log_city=$_POST['city'];
         $log_state=$_POST['state'];
@@ -209,13 +213,19 @@
         else
         {
             move_uploaded_file($log_image_tmp,"image/users/$newname");
-            if($log_password=='')
+            if($log_password=='' OR $log_cpassword=='')
                 $insert_log = "update login set log_image='$newname', log_name='$log_name', log_gender='$log_gender', log_mobile='$log_mobile', log_address='$log_address', log_city='$log_city', log_state='$log_state', log_zip='$log_zip', log_plan='$log_plan' where log_email='$get_user'";
             else
-                $insert_log = "update login set log_image='$newname', log_name='$log_name', log_gender='$log_gender', log_mobile='$log_mobile', log_address='$log_address', log_city='$log_city', log_state='$log_state', log_zip='$log_zip', log_password='$log_password', log_plan='$log_plan' where log_email='$get_user'";
-            $run_log = mysqli_query($con,$insert_log);
-            echo "<script>alert('Account Details Edited.')</script>";
-            echo "<script>window.open('./?account','_self')</script>";
+            {
+                include("include/mail.php");
+                $log_key=$log_name.$log_gender.date('F d, Y h:i:s A');
+                $log_key=md5($log_key);
+                $insert_log = "update login set log_image='$newname', log_name='$log_name', log_gender='$log_gender', log_mobile='$log_mobile', log_address='$log_address', log_city='$log_city', log_state='$log_state', log_zip='$log_zip', log_password='$log_password', log_plan='$log_plan', log_key='$log_key', log_approve='no' where log_email='$get_user'";
+                send_to_reset($log_name,$log_email,$log_key);
+            }
+            mysqli_query($con,$insert_log);
+            echo "<script>alert('Account Details Edited. Confirm Password Reset. Check Your E-mail.')</script>";
+            echo "<script>window.open('./?logout','_self')</script>";
         }
     }
 ?>

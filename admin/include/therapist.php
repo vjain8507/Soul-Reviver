@@ -1,5 +1,9 @@
 <?php include("connect.php"); ?>
-<div style="text-align:center;"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_therapist';">Add Therapist</button></div><br>
+<div style="text-align:center;">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?city';">City</button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?position';">Position</button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_therapist';">Add Therapist</button>
+</div><br>
 <table>
     <col width="62px">
     <thead>
@@ -33,18 +37,7 @@
                 $email = $row_therapist['email'];
                 $mobile = $row_therapist['mobile'];
                 $experience = $row_therapist['experience'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$city_name</td>
-                <td>$position_name</td>
-                <td>$name</td>
-                <td><img src='../../image/therapist/$image' height='100px' width='100px'></td>
-                <td>$email</td>
-                <td>$mobile</td>
-                <td>$experience</td>
-                <td><a href='./home.php?edit_therapist&ev=$id'><i class='material-icons'>mode_edit</i></a></td>
-                <td><a href='./home.php?delete_therapist&de=$id'><i class='material-icons'>delete_forever</i></a></td>
-                </tr>";
+                echo "<tr><td>".$i++."</td><td>$city_name</td><td>$position_name</td><td>$name</td><td><img src='../../image/therapist/$image' height='100px' width='100px'></td><td>$email</td><td>$mobile</td><td>$experience</td><td><a href='./home.php?edit_therapist&ev=$id'><i class='material-icons'>mode_edit</i></a></td><td><a href='./home.php?delete_therapist&de=$id'><i class='material-icons'>delete_forever</i></a></td></tr>";
             }
         ?>
     </tbody>
