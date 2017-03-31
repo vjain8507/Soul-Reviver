@@ -6,8 +6,8 @@
         <tr>
             <th>S. No.</th>
             <th>Position</th>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>

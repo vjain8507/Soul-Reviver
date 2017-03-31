@@ -6,7 +6,7 @@
         <tr>
             <th>S. No.</th>
             <th>Image</th>
-            <th></th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>

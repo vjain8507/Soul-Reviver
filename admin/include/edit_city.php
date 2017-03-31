@@ -41,8 +41,9 @@
 		}
 		else
 		{
-			$update_city = "UPDATE city SET city_name='$city_name' WHERE city_id='$update_id'";
-			mysqli_query($con,$update_city);
+			mysqli_query($con,"update position set city_name='$city_name' where city_id='$update_id'");
+            mysqli_query($con,"update therapist set city_name='$city_name' where city_id='$update_id'");
+            mysqli_query($con,"update city set city_name='$city_name' where city_id='$update_id'");
 			echo "<script>alert('City Has Been Updated')</script>";
 			echo "<script>window.open('./home.php?city','_self')</script>";
 		}

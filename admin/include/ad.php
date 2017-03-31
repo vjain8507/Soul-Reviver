@@ -6,8 +6,8 @@
         <tr>
             <th>S. No.</th>
             <th>Ad</th>
-            <th></th>
-            <th></th>
+            <th>Set</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>

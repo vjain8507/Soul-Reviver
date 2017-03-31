@@ -34,19 +34,7 @@
                 $log_state = $row_user['log_state'];
                 $log_zip = $row_user['log_zip'];
                 $log_plan = $row_user['log_plan'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$log_plan</td>
-                <td>$log_name</td>
-                <td><img src='../../image/users/$log_image' height='100px' width='100px'></td>
-                <td>$log_gender</td>
-                <td>$log_email</td>
-                <td>$log_mobile</td>
-                <td>$log_address</td>
-                <td>$log_city</td>
-                <td>$log_state</td>
-                <td>$log_zip</td>
-                </tr>";
+                echo "<tr><td>".$i++."</td><td>$log_plan</td><td>$log_name</td><td><img src='../../image/users/$log_image' height='100px' width='100px'></td><td>$log_gender</td><td>$log_email</td><td>$log_mobile</td><td>$log_address</td><td>$log_city</td><td>$log_state</td><td>$log_zip</td></tr>";
             }
         ?>
     </tbody>

@@ -102,6 +102,8 @@
                                 echo "ADD MEMBER";
                             else if(isset($_GET['users']))
                                 echo "USERS";
+                            else if(isset($_GET['comment']))
+                                echo "COMMENTS";
                             else
                                 echo"HOME";
                         ?>
@@ -230,6 +232,12 @@
                                 include("add_member.php");
                             else if(isset($_GET['users']))
                                 include("users.php");
+                            else if(isset($_GET['comment']))
+                                include("comment.php");
+                            else if(isset($_GET['set_com']))
+                                include("set_com.php");
+                            else if(isset($_GET['delete_com']))
+                                include("delete_com.php");
                             else
                                 echo"<h1>Welcome</h1>";
                         ?>

@@ -41,8 +41,8 @@
 		}
 		else
 		{
-			$update_section = "UPDATE section SET section_name='$section_name' WHERE section_id='$update_id'";
-			$run_update = mysqli_query($con,$update_section);
+			mysqli_query($con,"update section set section_name='$section_name' where section_id='$update_id'");
+            mysqli_query($con,"update team set section_name='$section_name' where section_id='$update_id'");
 			echo "<script>alert('Section Has Been Updated')</script>";
 			echo "<script>window.open('./home.php?section','_self')</script>";
 		}

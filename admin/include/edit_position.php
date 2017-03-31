@@ -41,8 +41,9 @@
 		}
 		else
 		{
-			$update_position = "UPDATE position_old SET position_name='$position_name' WHERE position_id='$update_id'";
-			mysqli_query($con,$update_position);
+            mysqli_query($con,"update position set position_name='$position_name' where position_id='$update_id'");
+            mysqli_query($con,"update therapist set position_name='$position_name' where position_id='$update_id'");
+            mysqli_query($con,"update position_old set position_name='$position_name' where position_id='$update_id'");
 			echo "<script>alert('Position Has Been Updated')</script>";
 			echo "<script>window.open('./home.php?position','_self')</script>";
 		}

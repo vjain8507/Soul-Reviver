@@ -1,10 +1,3 @@
-<script>
-    var loadFile = function(event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-    };
-
-</script>
 <style>
     .panel-body input {
         display: block;
@@ -47,12 +40,10 @@
                 <div class="panel-body">
                     <form action="./?signin" method="post" enctype="multipart/form-data">
                         <table>
-<!--
                             <thead>
                                 <col width="50%">
                             </thead>
                             <tbody>
--->
                                 <tr>
                                     <td style="text-align:center;">USERNAME</td>
                                     <td><input name="username" type="text" required></td>
@@ -62,10 +53,10 @@
                                     <td><input name="password" type="password" required></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><button name="login" type="submit" class="btn btn-info btn-block">LOGIN</button></td>
-                                    <!--<td><button name="forgot" type="submit" class="btn btn-info btn-block">Forgot Username/Password</button></td>-->
+                                    <td><button name="login" type="submit" class="btn btn-info btn-block">LOGIN</button></td>
+                                    <td><button class="btn btn-info btn-block" onclick="location.href='./?confirm&reset';">FORGOT PASSWORD</button></td>
                                 </tr>
-<!--                            </tbody>-->
+                            </tbody>
                         </table>
                     </form>
                 </div>

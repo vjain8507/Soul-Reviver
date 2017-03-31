@@ -1,4 +1,7 @@
+/*jslint browser: true*/
+/*global $ */
 $(document).ready(function () {
+    "use strict";
     $(".dropdown").hover(
         function () {
             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("fast");
@@ -9,13 +12,15 @@ $(document).ready(function () {
             $(this).toggleClass('open');
         });
     $('#cpassword').on('keyup', function () {
-        if ($(this).val() == $('#password').val()) {
+        if ($(this).val() === $('#password').val()) {
             $('#tick').html("<i class='fa fa-hand-o-right'></i>").css('color', 'green');
-        } else
+        } else {
             $('#tick').html("<i class='fa fa-hand-o-right'></i>").css('color', 'red');
+        }
     });
 });
 jQuery(function ($) {
+    "use strict";
     jQuery('#demo1').skdslider({
         delay: 5000,
         animationSpeed: 2000,
@@ -28,12 +33,12 @@ jQuery(function ($) {
         $('#responsive_wrapper').width(jQuery(this).val());
     });
     $(window).scroll(function () {
-        if ($(window).scrollTop() > 100 /*or $(window).height()*/ ) {
+        if ($(window).scrollTop() > 100) {
             $(".navbar-fixed-top").addClass('past-main');
         } else {
             $(".navbar-fixed-top").removeClass('past-main');
         }
-    })
+    });
     $('#firstTop').on("click", function () {
         var percentage = 100;
         var height = $(document).height();
@@ -79,16 +84,6 @@ jQuery(function ($) {
         }, 800);
         return false;
     });
-    var lastId,
-        topMenu = $("#top-menu"),
-        topMenuHeight = topMenu.outerHeight() + 10,
-        menuItems = topMenu.find("a"),
-        scrollItems = menuItems.map(function () {
-            var item = $($(this).attr("href"));
-            if (item.length) {
-                return item;
-            }
-        });
     menuItems.click(function (e) {
         var href = $(this).attr("href"),
             offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
@@ -100,8 +95,9 @@ jQuery(function ($) {
     $(window).scroll(function () {
         var fromTop = $(this).scrollTop() + topMenuHeight;
         var cur = scrollItems.map(function () {
-            if ($(this).offset().top < fromTop)
+            if ($(this).offset().top < fromTop) {
                 return this;
+            }
         });
         cur = cur[cur.length - 1];
         var id = cur && cur.length ? cur[0].id : "";
@@ -109,26 +105,25 @@ jQuery(function ($) {
             lastId = id;
             menuItems.parent().removeClass("active").end().filter("[href=#" + id + "]").parent().addClass("active");
         }
-    })
+    });
     $('.navbar-nav').on('click', 'li a', function () {
         $('.in').collapse('hide');
     });
-    var zoom = $('#map_canvas').gmap('option', 'zoom');
-    $('#map_canvas').gmap().bind('init', function (ev, map) {
-        $('#map_canvas').gmap('addMarker', {
-            'position': '12.933174,77.612197',
-            'bounds': true
+    jQuery(window).load(function () {
+        $('#status').fadeOut();
+        $('#preloader').delay(100).fadeOut('slow');
+        $('body').delay(100).css({
+            'overflow': 'visible'
         });
-        $('#map_canvas').gmap('option', 'zoom', 13);
     });
     wow = new WOW({
         animateClass: 'animated',
         offset: 100
     });
     wow.init();
-});;
+});
 (function (window) {
-    'use strict';
+    "use strict";
 
     function extend(a, b) {
         for (var key in b) {
@@ -175,6 +170,41 @@ jQuery(function ($) {
     };
     window.CBPFWTabs = CBPFWTabs;
 })(window);
+$(document).ready(function () {
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+        isClosed = false;
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+        if (isClosed == true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+});
 $().ready(function () {
     $('[rel="tooltip"]').tooltip();
 });
+
+function rotateCard(btn) {
+    var $card = $(btn).closest('.card-container');
+    console.log($card);
+    if ($card.hasClass('hover')) {
+        $card.removeClass('hover');
+    } else {
+        $card.addClass('hover');
+    }
+}

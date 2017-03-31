@@ -72,4 +72,40 @@
         $mail4->Body    = "Hi <b>$log_name</b>,<br><br>Your Password Has Been Changed.<br><br>Please Confirm Your Mail Address By Clicking On The Link Below Or By Copy & Paste In The URL Address Bar ...<br><br><a href='https://soulreviver.org/?confirm&key=$log_key'>https://soulreviver.org/?confirm&key=$log_key</a>";
         $mail4->send();
     }
+    function send_to_forgot($log_name,$log_email,$log_key)
+    {
+        $mail5 = new PHPMailer;
+        $mail5->isSMTP();
+        $mail5->Host = 'soulreviver.org';
+        $mail5->SMTPAuth = true;
+        $mail5->Username = 'help@soulreviver.org';
+        $mail5->Password = '@dm!n!@#$%';
+        $mail5->SMTPSecure = 'tls';
+        $mail5->Port = 587;
+        $mail5->setFrom('help@soulreviver.org', 'Soul Reviver');
+        $mail5->addAddress($log_email,$log_name);
+        $mail5->addReplyTo('help@soulreviver.org', 'Soul Reviver');
+        $mail5->isHTML(true);
+        $mail5->Subject = 'Reset Your Password';
+        $mail5->Body    = "Hi <b>$log_name</b>,<br><br>To Reset Your Password Click On The Link Below Or Copy & Paste In The URL Address Bar ...<br><br><a href='https://soulreviver.org/?confirm&resetkey=$log_key'>https://soulreviver.org/?confirm&resetkey=$log_key</a>";
+        $mail5->send();
+    }
+    function send_to_confirm($log_name,$log_email)
+    {
+        $mail6 = new PHPMailer;
+        $mail6->isSMTP();
+        $mail6->Host = 'soulreviver.org';
+        $mail6->SMTPAuth = true;
+        $mail6->Username = 'help@soulreviver.org';
+        $mail6->Password = '@dm!n!@#$%';
+        $mail6->SMTPSecure = 'tls';
+        $mail6->Port = 587;
+        $mail6->setFrom('help@soulreviver.org', 'Soul Reviver');
+        $mail6->addAddress($log_email,$log_name);
+        $mail6->addReplyTo('help@soulreviver.org', 'Soul Reviver');
+        $mail6->isHTML(true);
+        $mail6->Subject = 'Password Changed Confirmation Mail';
+        $mail6->Body    = "Hi <b>$log_name</b>,<br><br>Your Password Has Been Changed.";
+        $mail6->send();
+    }
 ?>

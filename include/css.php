@@ -5,6 +5,6 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/skdslider.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/animate.css"> 
+<link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/style.css">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+<script src="js/skype-uri.js"></script>

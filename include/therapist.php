@@ -15,6 +15,7 @@
             $row_pos = mysqli_fetch_array($run_pos);
             $rpos = $row_pos['position_name'];
             echo "<div class='who' style='padding-top:120px;'><h1 class='title'><span>$rpos</span></h1></div><div class='row'>";
+            include("include/button.php");
             $get_therapist = "select * from therapist where city_id = $city and position_id = $position";
             $run_therapist = mysqli_query($con,$get_therapist);
             while($row_therapist = mysqli_fetch_array($run_therapist))
@@ -24,7 +25,7 @@
                 $email = $row_therapist['email'];
                 $mobile = $row_therapist['mobile'];
                 $experience = $row_therapist['experience'];
-                echo "<div class='col-xs-12 col-sm-6 col-md-6'><div class='well well-sm'><div class='row'><div class='col-sm-6 col-md-4'><img src='image/therapist/$image' alt='' class='img-rounded img-responsive'/></div><div class='col-sm-6 col-md-8'><h4>$name</h4><p><strong>Email: </strong>$email</p><p><strong>Mobile: </strong>+91-$mobile</p><p><strong>Experiance: </strong>$experience</p><div class='btn-group'><button type='button' class='btn btn-primary'>Video Call</button></div></div></div></div></div>";
+                echo "<div class='col-xs-12 col-sm-6 col-md-6'><div class='well well-sm'><div class='row'><div class='col-sm-6 col-md-4'><img src='image/therapist/$image' alt='' class='img-rounded img-responsive'/></div><div class='col-sm-6 col-md-8'><h4>$name</h4><p><strong>Email: </strong>$email</p><p><strong>Mobile: </strong>+91-$mobile</p><p><strong>Experiance: </strong>$experience</p></div></div></div></div>";
             }
             echo "</div>";
         }

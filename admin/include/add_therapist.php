@@ -123,14 +123,14 @@
             $city_id = $city['city_id'];
             $position = mysqli_fetch_array(mysqli_query($con,"select position_id from position_old where position_name='$position_name'"));
             $position_id = $position['position_id'];
-            $insert_therapist = "insert into therapist (city_id,city_name,position_id,position_name,name,email,mobile,experience) values ('$city_id','$city_name','$position_id','$position_name','$name','$email','$mobile','$experience')";
-			mysqli_query($con,$insert_therapist);
-            $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT id FROM therapist ORDER BY id DESC LIMIT 1"));
+            if(mysqli_num_rows(mysqli_query($con,"select * from position where city_id='$city_id' and position_id='$position_id'")) == 0)
+                mysqli_query($con,"insert into position (city_id,city_name,position_id,position_name) values ('$city_id','$city_name','$position_id','$position_name')");
+			mysqli_query($con,"insert into therapist (city_id,city_name,position_id,position_name,name,email,mobile,experience) values ('$city_id','$city_name','$position_id','$position_name','$name','$email','$mobile','$experience')");
+            $last_sno = mysqli_fetch_array(mysqli_query($con,"select id from therapist order by id desc limit 1"));
             $get_sno = $last_sno['id'];
             $newname = "$get_sno.$ext";
             move_uploaded_file($image_tmp,"../../image/therapist/$newname");
-			$update_therapist = "update therapist set image='$newname' where id='$get_sno'";
-			mysqli_query($con,$update_therapist);
+			mysqli_query($con,"update therapist set image='$newname' where id='$get_sno'");
 			echo "<script>alert('Therapist Has Been Added Successfully')</script>";
 			echo "<script>window.open('./home.php?therapist','_self')</script>";
 		}

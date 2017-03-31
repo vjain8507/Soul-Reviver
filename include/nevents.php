@@ -34,10 +34,8 @@
 </style>
 <?php
     include("include/connect.php");
-    $get_event = "select * from nevent order by event_id desc";
-    $run_event = mysqli_query($con,$get_event);
     echo "<div class='container' style='padding-top:160px;'><div class='who'><h1 class='title'><span>News & Events</span></h1></div>";
-    if(mysqli_num_rows($run_event) != 0)
+    if(mysqli_num_rows(mysqli_query($con,"select * from nevent order by event_id desc")) != 0)
     {
         echo "<div class='panel-group' id='accordion' style='color:#000;'>";
         $i=0;
@@ -55,6 +53,10 @@
             echo "<div class='panel panel-default ttpanel'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#$event_id'>$i. $event_title</a></h4></div><div id='$event_id' class='panel-collapse collapse'><div class='panel-body'><p style='text-align:center;'><img src='image/nevents/$event_image'/></p><hr><p style='text-align:center;font-size:20px;line-height:2em;'><i class='fa fa-calendar'></i>$event_date<i class='fa fa-clock-o fae'></i>$event_time<i class='fa fa-map-marker fae'></i>$event_venue<br><i class='fa fa-users'></i>$event_cord</p><hr><div style='text-align:justify;font-size:20px;'>$event_detail</div></div></div></div>";
         }
         echo "</div>";
+    }
+    else
+    {
+        echo "<p class='tabd'>No News Or Events Yet...</p>";
     }
     echo "</div>";
 ?>

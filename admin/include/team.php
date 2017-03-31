@@ -14,8 +14,8 @@
             <th>Image</th>
             <th>Email</th>
             <th>Mobile</th>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>

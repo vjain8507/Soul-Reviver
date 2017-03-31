@@ -41,8 +41,8 @@
 		}
 		else
 		{
-			$update_cat = "UPDATE cat SET cat_name='$cat_name' WHERE cat_id='$update_id'";
-			$run_update = mysqli_query($con,$update_cat);
+			mysqli_query($con,"update cat set cat_name='$cat_name' where cat_id='$update_id'");
+            mysqli_query($con,"update post set cat_name='$cat_name' where cat_id='$update_id'");
 			echo "<script>alert('Category Has Been Updated')</script>";
 			echo "<script>window.open('./home.php?category','_self')</script>";
 		}

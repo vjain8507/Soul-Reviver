@@ -148,10 +148,11 @@
             $city_id = $city['city_id'];
             $position = mysqli_fetch_array(mysqli_query($con,"select position_id from position_old where position_name='$position_name'"));
             $position_id = $position['position_id'];
+            if(mysqli_num_rows(mysqli_query($con,"select * from position where city_id='$city_id' and position_id='$position_id'")) == 0)
+                mysqli_query($con,"insert into position (city_id,city_name,position_id,position_name) values ('$city_id','$city_name','$position_id','$position_name')");
             $newname = "$edit_id.$ext";
             move_uploaded_file($image_tmp,"../../image/therapist/$newname");
-            $update_topic = "update therapist set city_id='$city_id', city_name='$city_name', position_id='$position_id', position_name='$position_name', name='$name', image='$newname', email='$email', mobile='$mobile', experience='$experience' where id='$edit_id'";
-			mysqli_query($con,$update_topic);
+			mysqli_query($con,"update therapist set city_id='$city_id', city_name='$city_name', position_id='$position_id', position_name='$position_name', name='$name', image='$newname', email='$email', mobile='$mobile', experience='$experience' where id='$edit_id'");
 			echo "<script>alert('Therapist Has Been Edited Successfully')</script>";
 			echo "<script>window.open('./home.php?therapist','_self')</script>";
 		}

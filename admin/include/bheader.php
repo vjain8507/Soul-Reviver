@@ -2,7 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Admin Panel">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<title>Soulreviver Admin Panel</title>
+<title>Soul Reviver, Udaipur</title>
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" sizes="192x192" href="images/android-desktop.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,17 +19,21 @@
 <style>
     body {
         background-color: #263238;
-        display:flex;
+        display: flex;
     }
-    html,body {
-        height:100%;
-        width:100%;
-        margin:0;
+    
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
     }
+    
     form {
-        margin:auto;
+        margin: auto;
         background-color: white;
         padding: 50px;
         text-align: center;
     }
+
 </style>

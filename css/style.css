@@ -2958,3 +2958,18 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+.skypebutton {
+    margin-top: -60px !important;
+    margin-bottom: -20px !important;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.skypeleft {
+    display: flex !important;
+    text-align: center !important;
+}

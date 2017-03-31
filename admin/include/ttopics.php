@@ -10,8 +10,8 @@
             <th>Author</th>
             <th>Date</th>
             <th>Content</th>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
