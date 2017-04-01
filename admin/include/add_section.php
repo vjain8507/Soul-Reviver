@@ -16,7 +16,6 @@
     </table>
 </form>
 <?php
-    include("connect.php");
 	if(isset($_POST['add_section']))
 	{
         $section_name = $_POST['section'];
@@ -27,10 +26,8 @@
 		}
 		else
 		{
-			$insert_section = "insert into section (section_name) values ('$section_name')";
-			$run_section = mysqli_query($con,$insert_section);
-			echo "<script>alert('Section Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?section','_self')</script>";
+			mysqli_query($con,"insert into section (section_name) values ('$section_name')");
+			echo "<script>alert('Section Has Been Added Successfully')</script><script>window.open('./home.php?section','_self')</script>";
 		}
 	}
 ?>

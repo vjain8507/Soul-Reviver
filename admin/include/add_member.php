@@ -14,7 +14,6 @@
     <div style="text-align:center;"><button name="add_member" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">ADD</button></div>
 </form>
 <?php
-    include("connect.php");
 	if(isset($_POST['add_member']))
 	{
 		$uname=$_POST['uname'];
@@ -29,15 +28,12 @@
 		{
             if($pass!=$cpass)
             {
-                echo "<script>alert('Member Not Added.')</script>";
-                echo "<script>window.open('./home.php','_self')</script>";
+                echo "<script>alert('Member Not Added.')</script><script>window.open('./home.php','_self')</script>";
             }
             else
             {
-                $insert_member = "insert into admin (user,pwd) values ('$uname','$pass')";
-                $run_member = mysqli_query($con,$insert_member);
-                echo "<script>alert('Member Added.')</script>";
-                echo "<script>window.open('./home.php','_self')</script>";
+                mysqli_query($con,"insert into admin (user,pwd) values ('$uname','$pass')");
+                echo "<script>alert('Member Added.')</script><script>window.open('./home.php','_self')</script>";
             }
         }
 	}

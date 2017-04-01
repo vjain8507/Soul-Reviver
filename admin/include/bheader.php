@@ -35,5 +35,4 @@
         padding: 50px;
         text-align: center;
     }
-
 </style>

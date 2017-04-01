@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_position';">Add Position</button></div><br>
 <table>
     <col width="62px">
@@ -12,8 +11,7 @@
     </thead>
     <tbody>
         <?php
-            $get_position = "select * from position_old order by position_id desc";
-            $run_position = mysqli_query($con,$get_position);
+            $run_position = mysqli_query($con,"select * from position_old order by position_id desc");
             $i=1;
             while($row_position = mysqli_fetch_array($run_position))
             {

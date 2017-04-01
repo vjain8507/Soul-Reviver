@@ -30,12 +30,9 @@
     .fae {
         padding-left: 30px;
     }
-
 </style>
 <?php
-    include("include/connect.php");
-    $get_topic = "select * from ttopic order by sno desc";
-    $run_topic = mysqli_query($con,$get_topic);
+    $run_topic = mysqli_query($con,"select * from ttopic order by sno desc");
     echo "<div class='container' style='padding-top:160px;'><div class='who'><h1 class='title'><span>Trending Topics</span></h1></div>";
     if(mysqli_num_rows($run_topic) != 0)
     {
@@ -55,8 +52,6 @@
         echo "</div>";
     }
     else
-    {
         echo "<p class='tabd'>No Topics Yet...</p>";
-    }
     echo "</div>";
 ?>

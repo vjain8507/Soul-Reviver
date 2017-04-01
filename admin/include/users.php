@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <table>
     <col width="62px">
     <thead>
@@ -18,8 +17,7 @@
     </thead>
     <tbody>
         <?php
-            $get_user = "select * from login order by log_id desc";
-            $run_user = mysqli_query($con,$get_user);
+            $run_user = mysqli_query($con,"select * from login order by log_id desc");
             $i=1;
             while($row_user = mysqli_fetch_array($run_user))
             {

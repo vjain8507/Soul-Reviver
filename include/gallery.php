@@ -1,8 +1,6 @@
 <?php
-    include("include/connect.php");
-    $select_g = "select * from gallery";
-    $run_query = mysqli_query($con,$select_g);
     echo "<section class='container'><div class='who' style='padding-top:150px;'><h1><span>GALLERY</span></h1></div>";
+    $run_query = mysqli_query($con,"select * from gallery");
     if(mysqli_num_rows($run_query) != 0)
     {
         echo "<div class='row gal-container'>";
@@ -15,8 +13,6 @@
         echo "</div>";
     }
     else
-    {
         echo "<p class='tabd'>No Photos Yet...</p>";
-    }
     echo "</section>";
 ?>

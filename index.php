@@ -1,6 +1,7 @@
 <?php
     include("include/connect.php");
 	session_start();
+    date_default_timezone_set('Asia/Kolkata');
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -10,8 +11,8 @@
     </head>
 
     <body>
-        <?php include("./include/header.php"); ?>
         <?php
+            include("./include/header.php");
             if(isset($_GET['about']))
             {
                 include("include/about.php");
@@ -81,8 +82,8 @@
                 include("include/news-events.php");
                 include("include/ad.php");
             }
+            include("include/footer.php");
         ?>
-            <?php include("include/footer.php"); ?>
     </body>
 
     </html>

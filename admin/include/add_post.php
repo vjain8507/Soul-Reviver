@@ -10,9 +10,7 @@
                     <select class="mdl-selectfield__select" id="category" name="category">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            include("connect.php");
-                            $get_cat = "select * from cat";
-                            $run_cat = mysqli_query($con,$get_cat);
+                            $run_cat = mysqli_query($con,"select * from cat");
                             $i=1;
                             while($row_cat = mysqli_fetch_array($run_cat))
                             {
@@ -88,16 +86,13 @@
 		{
             $cat = mysqli_fetch_array(mysqli_query($con,"select cat_id from cat where cat_name='$cat_name'"));
             $cat_id = $cat['cat_id'];
-            $insert_post = "insert into post (cat_id,cat_name,post_title,post_data,post_author,post_date) values ('$cat_id','$cat_name','$post_title','$post_data','$post_author','$post_date')";
-			mysqli_query($con,$insert_post);
+			mysqli_query($con,"insert into post (cat_id,cat_name,post_title,post_data,post_author,post_date) values ('$cat_id','$cat_name','$post_title','$post_data','$post_author','$post_date')");
             $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT post_id FROM post ORDER BY post_id DESC LIMIT 1"));
             $get_sno = $last_sno['post_id'];
             $newname = "$get_sno.$ext";
             move_uploaded_file($post_image_tmp,"../../image/post/$newname");
-			$update_post = "update post set post_image='$newname' where post_id='$get_sno'";
-			mysqli_query($con,$update_post);
-			echo "<script>alert('Post Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?post','_self')</script>";
+			mysqli_query($con,"update post set post_image='$newname' where post_id='$get_sno'");
+			echo "<script>alert('Post Has Been Added Successfully')</script><script>window.open('./home.php?post','_self')</script>";
 		}
 	}
 ?>

@@ -11,7 +11,6 @@
             document.getElementById("submit").disabled = true;
         }
     }
-
 </script>
 <style>
     .panel-body input {
@@ -75,7 +74,6 @@
         color: #FF0000;
         font-size: 20px;
     }
-
 </style>
 <div class="container" style="padding-top:150px;">
     <div class="row">
@@ -159,7 +157,6 @@
     </div>
 </div>
 <?php
-    include("include/connect.php");
 	if(isset($_POST['submit']))
 	{
 		$log_plan=$_POST['plan'];
@@ -178,8 +175,7 @@
         $newname = "$log_email.$ext";
 		$log_image_tmp = $_FILES['image']['tmp_name'];
         $status=0;
-        $get_email = "select log_email from login";
-        $run_email = mysqli_query($con,$get_email);
+        $run_email = mysqli_query($con,"select log_email from login");
         while($row_email = mysqli_fetch_array($run_email))
         {
             $email_user = $row_email['log_email'];
@@ -202,21 +198,15 @@
 		else
 		{
             if($log_password!=$log_cpassword)
-            {
-                echo "<script>alert('Registration Unsuccessful!!!')</script>";
-                echo "<script>window.open('./?signup','_self')</script>";
-            }
+                echo "<script>alert('Registration Unsuccessful!!!')</script><script>window.open('./?signup','_self')</script>";
             else
             {
                 include("include/mail.php");
-                $log_key=$log_name.$log_email.$log_gender.date('F d, Y h:i:s A');
-                $log_key=md5($log_key);
+                $log_key=md5($log_name.$log_email.$log_gender.date('F d, Y h:i:s A'));
                 move_uploaded_file($log_image_tmp,"image/users/$newname");
-                $insert_log = "insert into login (log_image,log_name,log_gender,log_email,log_mobile,log_address,log_city,log_state,log_zip,log_username,log_password,log_plan,log_key,log_approve) values ('$newname','$log_name','$log_gender','$log_email','$log_mobile','$log_address','$log_city','$log_state','$log_zip','$log_email','$log_password','$log_plan','$log_key','no')";
-                $run_log = mysqli_query($con,$insert_log);
+                mysqli_query($con,"insert into login (log_image,log_name,log_gender,log_email,log_mobile,log_address,log_city,log_state,log_zip,log_username,log_password,log_plan,log_key,log_approve) values ('$newname','$log_name','$log_gender','$log_email','$log_mobile','$log_address','$log_city','$log_state','$log_zip','$log_email','$log_password','$log_plan','$log_key','no')");
                 send_to_register($log_name,$log_email,$log_key);
-                echo "<script>alert('Registration Complete, Check Your Mail To Confirm.')</script>";
-                echo "<script>window.open('./?signin','_self')</script>";
+                echo "<script>alert('Registration Complete, Check Your Mail To Confirm.')</script><script>window.open('./?signin','_self')</script>";
             }
 		}
 	}

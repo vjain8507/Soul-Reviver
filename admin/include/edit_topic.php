@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $get_topic = "select * from ttopic where sno='$edit_id'";
-        $run_topic = mysqli_query($con,$get_topic);
+        $run_topic = mysqli_query($con,"select * from ttopic where sno='$edit_id'");
         while($row_topic = mysqli_fetch_array($run_topic))
         {
             $sno = $row_topic['sno'];
@@ -93,10 +91,8 @@
 		{
             $newname = "$edit_id.$ext";
             move_uploaded_file($image_tmp,"../../image/ttopics/$newname");
-			$update_topic = "update ttopic set heading='$heading', image='$newname', author='$author', date='$date', content='$content' where sno='$edit_id'";
-			mysqli_query($con,$update_topic);
-			echo "<script>alert('Topic Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?ttopics','_self')</script>";
+			mysqli_query($con,"update ttopic set heading='$heading', image='$newname', author='$author', date='$date', content='$content' where sno='$edit_id'");
+			echo "<script>alert('Topic Has Been Added Successfully')</script><script>window.open('./home.php?ttopics','_self')</script>";
 		}
 	}
 ?>

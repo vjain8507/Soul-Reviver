@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;">
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?section';">Section</button>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_team';">Add Team Member</button>
@@ -20,8 +19,7 @@
     </thead>
     <tbody>
         <?php
-            $get_team = "select * from team order by id desc";
-            $run_team = mysqli_query($con,$get_team);
+            $run_team = mysqli_query($con,"select * from team order by id desc");
             $i=1;
             while($row_team = mysqli_fetch_array($run_team))
             {

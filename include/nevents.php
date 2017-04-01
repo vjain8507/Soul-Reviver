@@ -30,12 +30,11 @@
     .fae {
         padding-left: 30px;
     }
-
 </style>
 <?php
-    include("include/connect.php");
     echo "<div class='container' style='padding-top:160px;'><div class='who'><h1 class='title'><span>News & Events</span></h1></div>";
-    if(mysqli_num_rows(mysqli_query($con,"select * from nevent order by event_id desc")) != 0)
+    $run_event = mysqli_query($con,"select * from nevent order by event_id desc");
+    if(mysqli_num_rows($run_event) != 0)
     {
         echo "<div class='panel-group' id='accordion' style='color:#000;'>";
         $i=0;
@@ -55,8 +54,6 @@
         echo "</div>";
     }
     else
-    {
         echo "<p class='tabd'>No News Or Events Yet...</p>";
-    }
     echo "</div>";
 ?>

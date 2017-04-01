@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $get_therapist = "select * from therapist where id='$edit_id'";
-        $run_therapist = mysqli_query($con,$get_therapist);
+        $run_therapist = mysqli_query($con,"select * from therapist where id='$edit_id'");
         while($row_therapist = mysqli_fetch_array($run_therapist))
         {
             $id = $row_therapist['id'];
@@ -28,8 +26,7 @@
                     <div class="mdl-selectfield mdl-js-selectfield">
                         <select class="mdl-selectfield__select" id="city" name="city">
                         <?php
-                            $get_city = "select * from city";
-                            $run_city = mysqli_query($con,$get_city);
+                            $run_city = mysqli_query($con,"select * from city");
                             while($row_city = mysqli_fetch_array($run_city))
                             {
                                 $city_name = $row_city['city_name'];
@@ -53,8 +50,7 @@
                         <select class="mdl-selectfield__select" id="position" name="position">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            $get_position = "select * from position_old";
-                            $run_position = mysqli_query($con,$get_position);
+                            $run_position = mysqli_query($con,"select * from position_old");
                             while($row_position = mysqli_fetch_array($run_position))
                             {
                                 $position_name = $row_position['position_name'];
@@ -153,8 +149,7 @@
             $newname = "$edit_id.$ext";
             move_uploaded_file($image_tmp,"../../image/therapist/$newname");
 			mysqli_query($con,"update therapist set city_id='$city_id', city_name='$city_name', position_id='$position_id', position_name='$position_name', name='$name', image='$newname', email='$email', mobile='$mobile', experience='$experience' where id='$edit_id'");
-			echo "<script>alert('Therapist Has Been Edited Successfully')</script>";
-			echo "<script>window.open('./home.php?therapist','_self')</script>";
+			echo "<script>alert('Therapist Has Been Edited Successfully')</script><script>window.open('./home.php?therapist','_self')</script>";
 		}
 	}
 ?>

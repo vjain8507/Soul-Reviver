@@ -79,7 +79,6 @@
 <?php
 	if(isset($_POST['add_event']))
 	{
-        include("connect.php");
         $event_title = $_POST['title'];
         $info = pathinfo($_FILES['image']['name']);
         $ext = $info['extension'];
@@ -96,16 +95,13 @@
 		}
 		else
 		{
-			$insert_event = "insert into nevent (event_title,event_date,event_time,event_venue,event_cord,event_detail) values ('$event_title','$event_date','$event_time','$event_venue','$event_cord','$event_detail')";
-			mysqli_query($con,$insert_event);
+			mysqli_query($con,"insert into nevent (event_title,event_date,event_time,event_venue,event_cord,event_detail) values ('$event_title','$event_date','$event_time','$event_venue','$event_cord','$event_detail')");
             $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT event_id FROM nevent ORDER BY event_id DESC LIMIT 1"));
             $get_sno = $last_sno['event_id'];
             $newname = "$get_sno.$ext";
             move_uploaded_file($event_image_tmp,"../../image/nevents/$newname");
-            $update_event = "update nevent set event_image='$newname' where event_id='$get_sno'";
-			mysqli_query($con,$update_event);
-			echo "<script>alert('News/Event Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?news-events','_self')</script>";
+			mysqli_query($con,"update nevent set event_image='$newname' where event_id='$get_sno'");
+			echo "<script>alert('News/Event Has Been Added Successfully')</script><script>window.open('./home.php?news-events','_self')</script>";
 		}
 	}
 ?>

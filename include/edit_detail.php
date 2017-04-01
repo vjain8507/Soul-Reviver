@@ -1,16 +1,13 @@
 <?php
 	if(!$_SESSION['username'])
-	{
 		header("Location: ./");
-	}
 ?>
     <?php
     if(isset($_SESSION['username']))
     {
         $get_user = $_SESSION['username'];
-        $get_user_detail = "select * from login where log_username='$get_user'";
-        $run_user_detail = mysqli_query($con,$get_user_detail);
-        while($row_user = mysqli_fetch_array($run_user_detail))
+        $run_user = mysqli_query($con,"select * from login where log_username='$get_user'");
+        while($row_user = mysqli_fetch_array($run_user))
         {
             $log_username = $row_user['log_username'];
             $log_password = $row_user['log_password'];
@@ -32,7 +29,6 @@
                 var output = document.getElementById('output');
                 output.src = URL.createObjectURL(event.target.files[0]);
             };
-
         </script>
         <style>
             .panel-body input {
@@ -91,7 +87,6 @@
                 user-select: none;
                 cursor: default;
             }
-
         </style>
         <div class="container" style="padding-top:150px;">
             <div class="row">
@@ -186,7 +181,6 @@
             </div>
         </div>
         <?php
-    include("include/connect.php");
 	if(isset($_POST['submit']))
 	{
         $get_user = $_SESSION['username'];
@@ -206,10 +200,7 @@
         $newname = "$log_email.$ext";
 		$log_image_tmp = $_FILES['image']['tmp_name'];
         if($log_password!=$log_cpassword)
-        {
-            echo "<script>alert('Confirm Password Do Not Match!!!')</script>";
-            echo "<script>window.open('./?account','_self')</script>";
-        }
+            echo "<script>alert('Confirm Password Do Not Match!!!')</script><script>window.open('./?account','_self')</script>";
         else
         {
             move_uploaded_file($log_image_tmp,"image/users/$newname");
@@ -218,14 +209,12 @@
             else
             {
                 include("include/mail.php");
-                $log_key=$log_name.$log_gender.date('F d, Y h:i:s A');
-                $log_key=md5($log_key);
+                $log_key=md5($log_name.$log_gender.date('F d, Y h:i:s A'));
                 $insert_log = "update login set log_image='$newname', log_name='$log_name', log_gender='$log_gender', log_mobile='$log_mobile', log_address='$log_address', log_city='$log_city', log_state='$log_state', log_zip='$log_zip', log_password='$log_password', log_plan='$log_plan', log_key='$log_key', log_approve='no' where log_email='$get_user'";
                 send_to_reset($log_name,$log_email,$log_key);
             }
             mysqli_query($con,$insert_log);
-            echo "<script>alert('Account Details Edited. Confirm Password Reset. Check Your E-mail.')</script>";
-            echo "<script>window.open('./?logout','_self')</script>";
+            echo "<script>alert('Account Details Edited. Confirm Password Reset. Check Your E-mail.')</script><script>window.open('./?logout','_self')</script>";
         }
     }
 ?>

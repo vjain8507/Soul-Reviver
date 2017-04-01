@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <table>
     <col width="62px">
     <thead>
@@ -35,40 +34,31 @@
                 $approve = $row_com['approve'];
                 $post = mysqli_fetch_array(mysqli_query($con,"select post_title from post where post_id='$com_post'"));
                 $post_title = $post['post_title'];
-                echo "<tr>
-                <td>".$i++."</td>
-                <td>$post_title</td>
-                <td>$com_date</td>
-                <td>$com_name</td>
-                <td>$com_email</td>
-                <td>$com_msg</td>
-                <td>";
-                    if(isset($_GET['p']))
-                    {
-                        $getid = $_GET['p'];
-                        if($approve=='yes')
-                            echo "<a href='./home.php?set_com&p=$getid&c=$com_id'><i class='material-icons'>done</i></a>";
-                        else
-                            echo "<a href='./home.php?set_com&p=$getid&c=$com_id'><i class='material-icons'>close</i></a>";
-                    }
-                    else
-                    {
-                        if($approve=='yes')
-                            echo "<a href='./home.php?set_com&c=$com_id'><i class='material-icons'>done</i></a>";
-                        else
-                            echo "<a href='./home.php?set_com&c=$com_id'><i class='material-icons'>close</i></a>";
-                    }
-                echo"</td>
-                <td>";
+                echo "<tr><td>".$i++."</td><td>$post_title</td><td>$com_date</td><td>$com_name</td><td>$com_email</td><td>$com_msg</td><td>";
                 if(isset($_GET['p']))
-                    {
-                        $getid = $_GET['p'];
-                        echo "<a href='./home.php?delete_com&p=$getid&de=$com_id'><i class='material-icons'>delete_forever</i></a>";
-                    }
+                {
+                    $getid = $_GET['p'];
+                    if($approve=='yes')
+                        echo "<a href='./home.php?set_com&p=$getid&c=$com_id'><i class='material-icons'>done</i></a>";
                     else
-                        echo "<a href='./home.php?delete_com&de=$com_id'><i class='material-icons'>delete_forever</i></a>";
-                echo "</td>
-            </tr>";
+                        echo "<a href='./home.php?set_com&p=$getid&c=$com_id'><i class='material-icons'>close</i></a>";
+                }
+                else
+                {
+                    if($approve=='yes')
+                        echo "<a href='./home.php?set_com&c=$com_id'><i class='material-icons'>done</i></a>";
+                    else
+                        echo "<a href='./home.php?set_com&c=$com_id'><i class='material-icons'>close</i></a>";
+                }
+                echo"</td><td>";
+                if(isset($_GET['p']))
+                {
+                    $getid = $_GET['p'];
+                    echo "<a href='./home.php?delete_com&p=$getid&de=$com_id'><i class='material-icons'>delete_forever</i></a>";
+                }
+                else
+                    echo "<a href='./home.php?delete_com&de=$com_id'><i class='material-icons'>delete_forever</i></a>";
+                echo "</td></tr>";
             }
         ?>
     </tbody>

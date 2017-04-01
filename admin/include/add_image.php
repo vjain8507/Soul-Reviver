@@ -18,19 +18,15 @@
 <?php
 	if(isset($_POST['add_image']))
 	{
-        include("connect.php");
         $info = pathinfo($_FILES['image']['name']);
         $ext = $info['extension'];
 		$image_tmp = $_FILES['image']['tmp_name'];
-        $insert_image = "insert into gallery (imgname) values ('null')";
-        mysqli_query($con,$insert_image);
+        mysqli_query($con,"insert into gallery (imgname) values ('null')");
         $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT sno FROM gallery ORDER BY sno DESC LIMIT 1"));
         $get_sno = $last_sno['sno'];
         $newname = "$get_sno.$ext";
         move_uploaded_file($image_tmp,"../../image/gallery/$newname");
-        $update_image = "update gallery set imgname='$newname' where sno='$get_sno'";
-        mysqli_query($con,$update_image);
-        echo "<script>alert('Image Has Been Added Successfully')</script>";
-        echo "<script>window.open('./home.php?gallery','_self')</script>";
+        mysqli_query($con,"update gallery set imgname='$newname' where sno='$get_sno'");
+        echo "<script>alert('Image Has Been Added Successfully')</script><script>window.open('./home.php?gallery','_self')</script>";
 	}
 ?>

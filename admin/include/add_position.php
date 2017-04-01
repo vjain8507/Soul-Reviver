@@ -16,7 +16,6 @@
     </table>
 </form>
 <?php
-    include("connect.php");
 	if(isset($_POST['add_position']))
 	{
         $position_name = $_POST['position'];
@@ -27,10 +26,8 @@
 		}
 		else
 		{
-			$insert_position = "insert into position_old (position_name) values ('$position_name')";
-			mysqli_query($con,$insert_position);
-			echo "<script>alert('Position Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?position','_self')</script>";
+			mysqli_query($con,"insert into position_old (position_name) values ('$position_name')");
+			echo "<script>alert('Position Has Been Added Successfully')</script><script>window.open('./home.php?position','_self')</script>";
 		}
 	}
 ?>

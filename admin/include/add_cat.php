@@ -16,7 +16,6 @@
     </table>
 </form>
 <?php
-    include("connect.php");
 	if(isset($_POST['add_cat']))
 	{
         $cat_name = $_POST['category'];
@@ -27,10 +26,8 @@
 		}
 		else
 		{
-			$insert_cat = "insert into cat (cat_name) values ('$cat_name')";
-			$run_cat = mysqli_query($con,$insert_cat);
-			echo "<script>alert('Category Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?category','_self')</script>";
+			$run_cat = mysqli_query($con,"insert into cat (cat_name) values ('$cat_name')");
+			echo "<script>alert('Category Has Been Added Successfully')</script><script>window.open('./home.php?category','_self')</script>";
 		}
 	}
 ?>

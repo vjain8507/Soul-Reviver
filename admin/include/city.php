@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_city';">Add City</button></div><br>
 <table>
     <col width="62px">
@@ -12,8 +11,7 @@
     </thead>
     <tbody>
         <?php
-            $get_city = "select * from city order by city_id desc";
-            $run_city = mysqli_query($con,$get_city);
+            $run_city = mysqli_query($con,"select * from city order by city_id desc");
             $i=1;
             while($row_city = mysqli_fetch_array($run_city))
             {

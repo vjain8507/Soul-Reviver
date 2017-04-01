@@ -1,7 +1,5 @@
 <?php
-    include("include/connect.php");
-    $get_event = "select * from nevent order by event_id desc limit 4";
-    $run_event = mysqli_query($con,$get_event);
+    $run_event = mysqli_query($con,"select * from nevent order by event_id desc limit 4");
     if(mysqli_num_rows($run_event) != 0)
     {
         echo "<section style='margin-bottom:50px;'><div class='sp who container'><h1 class='title'><span>News & Events</span></h1></div><div class='container'><div class='row'>";

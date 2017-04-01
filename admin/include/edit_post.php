@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $get_post = "select * from post where post_id='$edit_id'";
-        $run_post = mysqli_query($con,$get_post);
+        $run_post = mysqli_query($con,"select * from post where post_id='$edit_id'");
         while($row_post = mysqli_fetch_array($run_post))
         {
             $cat_name = $row_post['cat_name'];
@@ -28,9 +26,7 @@
                     <div class="mdl-selectfield mdl-js-selectfield">
                         <select class="mdl-selectfield__select" id="category" name="category">
                         <?php
-                            include("connect.php");
-                            $get_cat = "select * from cat";
-                            $run_cat = mysqli_query($con,$get_cat);
+                            $run_cat = mysqli_query($con,"select * from cat");
                             $i=1;
                             while($row_cat = mysqli_fetch_array($run_cat))
                             {
@@ -108,10 +104,8 @@
             $cat_id = $cat['cat_id'];
             $newname = "$edit_id.$ext";
             move_uploaded_file($post_image_tmp,"../../image/post/$newname");
-			$update_post = "update post set cat_id='$cat_id', cat_name='$cat_name', post_title='$post_title', post_image='$newname', post_data='$post_data', post_author='$post_author', post_date='$post_date' where post_id='$edit_id'";
-			mysqli_query($con,$update_post);
-			echo "<script>alert('Post Has Been Edited Successfully')</script>";
-			echo "<script>window.open('./home.php?post','_self')</script>";
+			mysqli_query($con,"update post set cat_id='$cat_id', cat_name='$cat_name', post_title='$post_title', post_image='$newname', post_data='$post_data', post_author='$post_author', post_date='$post_date' where post_id='$edit_id'");
+			echo "<script>alert('Post Has Been Edited Successfully')</script><script>window.open('./home.php?post','_self')</script>";
 		}
 	}
 ?>

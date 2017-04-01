@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_topic';">Add Topic</button></div><br>
 <table>
     <col width="62px">
@@ -16,8 +15,7 @@
     </thead>
     <tbody>
         <?php
-            $get_topic = "select * from ttopic order by sno desc";
-            $run_topic = mysqli_query($con,$get_topic);
+            $run_topic = mysqli_query($con,"select * from ttopic order by sno desc");
             $i=1;
             while($row_topic = mysqli_fetch_array($run_topic))
             {

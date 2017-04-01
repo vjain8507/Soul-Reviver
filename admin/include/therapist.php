@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;">
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?city';">City</button>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?position';">Position</button>
@@ -22,8 +21,7 @@
     </thead>
     <tbody>
         <?php
-            $get_therapist = "select * from therapist order by id desc";
-            $run_therapist = mysqli_query($con,$get_therapist);
+            $run_therapist = mysqli_query($con,"select * from therapist order by id desc");
             $i=1;
             while($row_therapist = mysqli_fetch_array($run_therapist))
             {

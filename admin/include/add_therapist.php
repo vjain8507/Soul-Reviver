@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <form action="./home.php?add_therapist" method="post" enctype="multipart/form-data">
     <table>
         <tr>
@@ -10,8 +9,7 @@
                     <select class="mdl-selectfield__select" id="city" name="city">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            $get_city = "select * from city";
-                            $run_city = mysqli_query($con,$get_city);
+                            $run_city = mysqli_query($con,"select * from city");
                             while($row_city = mysqli_fetch_array($run_city))
                             {
                                 $city_name = $row_city['city_name'];
@@ -32,8 +30,7 @@
                     <select class="mdl-selectfield__select" id="position" name="position">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            $get_position = "select * from position_old";
-                            $run_position = mysqli_query($con,$get_position);
+                            $run_position = mysqli_query($con,"select * from position_old");
                             while($row_position = mysqli_fetch_array($run_position))
                             {
                                 $position_name = $row_position['position_name'];
@@ -131,8 +128,7 @@
             $newname = "$get_sno.$ext";
             move_uploaded_file($image_tmp,"../../image/therapist/$newname");
 			mysqli_query($con,"update therapist set image='$newname' where id='$get_sno'");
-			echo "<script>alert('Therapist Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?therapist','_self')</script>";
+			echo "<script>alert('Therapist Has Been Added Successfully')</script><script>window.open('./home.php?therapist','_self')</script>";
 		}
 	}
 ?>

@@ -18,21 +18,16 @@
 <?php
 	if(isset($_POST['add_ad']))
 	{
-        include("connect.php");
-        $update_ad = "update ad set ad_status=0";
-        mysqli_query($con,$update_ad);
+        mysqli_query($con,"update ad set ad_status='0'");
         $info = pathinfo($_FILES['image']['name']);
         $ext = $info['extension'];
 		$image_tmp = $_FILES['image']['tmp_name'];
-        $insert_image = "insert into ad (ad_image,ad_status) values ('null','1')";
-        mysqli_query($con,$insert_image);
+        mysqli_query($con,"insert into ad (ad_image,ad_status) values ('null','1')");
         $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT ad_id FROM ad ORDER BY ad_id DESC LIMIT 1"));
         $get_sno = $last_sno['ad_id'];
         $newname = "$get_sno.$ext";
         move_uploaded_file($image_tmp,"../../image/ads/$newname");
-        $update_image = "update ad set ad_image='$newname' where ad_id='$get_sno'";
-        mysqli_query($con,$update_image);
-        echo "<script>alert('Ad Has Been Added Successfully')</script>";
-        echo "<script>window.open('./home.php?ad','_self')</script>";
+        mysqli_query($con,"update ad set ad_image='$newname' where ad_id='$get_sno'");
+        echo "<script>alert('Ad Has Been Added Successfully')</script><script>window.open('./home.php?ad','_self')</script>";
 	}
 ?>

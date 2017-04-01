@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $select_position = "select * from position_old where position_id='$edit_id'";
-        $run_position = mysqli_query($con,$select_position);
+        $run_position = mysqli_query($con,"select * from position_old where position_id='$edit_id'");
         while($row_position = mysqli_fetch_array($run_position))
         {
             $position_id = $row_position['position_id'];
@@ -44,8 +42,7 @@
             mysqli_query($con,"update position set position_name='$position_name' where position_id='$update_id'");
             mysqli_query($con,"update therapist set position_name='$position_name' where position_id='$update_id'");
             mysqli_query($con,"update position_old set position_name='$position_name' where position_id='$update_id'");
-			echo "<script>alert('Position Has Been Updated')</script>";
-			echo "<script>window.open('./home.php?position','_self')</script>";
+			echo "<script>alert('Position Has Been Updated')</script><script>window.open('./home.php?position','_self')</script>";
 		}
 	}
 ?>

@@ -28,7 +28,6 @@
     .panel-heading {
         text-align: center;
     }
-
 </style>
 <div class="container" style="padding-top:150px;">
     <div class="row">
@@ -65,21 +64,17 @@
     </div>
 </div>
 <?php
-    include("include/connect.php");
 	if(isset($_POST['login']))
 	{
 		$log_username=$_POST['username'];
 		$log_password=$_POST['password'];
-		$check_user="select * from login WHERE log_username='$log_username' AND log_password='$log_password' AND log_approve='yes'";
-		$run=mysqli_query($con,$check_user);
-		if(mysqli_num_rows($run))
+        $run_login = mysqli_query($con,"select * from login where log_username='$log_username' and log_password='$log_password' and log_approve='yes'");
+		if(mysqli_num_rows($run_login))
 		{
             $_SESSION['username']=$log_username;
 			echo "<script>window.open('./','_self')</script>";
 		}
 		else
-		{
 			echo "<script>alert('Username Or Password Is Incorrect Or Not Confirmed Your E-mail.')</script>";
-		}
 	}
 ?>

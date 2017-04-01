@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $get_event = "select * from nevent where event_id='$edit_id'";
-        $run_event = mysqli_query($con,$get_event);
+        $run_event = mysqli_query($con,"select * from nevent where event_id='$edit_id'");
         while($row_event = mysqli_fetch_array($run_event))
         {
             $event_id = $row_event['event_id'];
@@ -118,10 +116,8 @@
 		{
             $newname = "$edit_id.$ext";
             move_uploaded_file($event_image_tmp,"../../image/nevents/$newname");
-			$update_event = "update nevent set event_title='$event_title', event_image='$newname', event_date='$event_date', event_time='$event_time', event_venue='$event_venue', event_cord='$event_cord', event_detail='$event_detail' where event_id='$edit_id'";
-			mysqli_query($con,$update_event);
-			echo "<script>alert('News/Event Has Been Updated Successfully')</script>";
-			echo "<script>window.open('./home.php?news-events','_self')</script>";
+			mysqli_query($con,"update nevent set event_title='$event_title', event_image='$newname', event_date='$event_date', event_time='$event_time', event_venue='$event_venue', event_cord='$event_cord', event_detail='$event_detail' where event_id='$edit_id'");
+			echo "<script>alert('News/Event Has Been Updated Successfully')</script><script>window.open('./home.php?news-events','_self')</script>";
 		}
 	}
 ?>

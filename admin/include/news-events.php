@@ -1,4 +1,3 @@
-<?php include("connect.php"); ?>
 <div style="text-align:center;"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='./home.php?add_event';">Add Event</button></div><br>
 <table>
     <col width="62px">
@@ -18,8 +17,7 @@
     </thead>
     <tbody>
         <?php
-            $get_event = "select * from nevent order by event_id desc";
-            $run_event = mysqli_query($con,$get_event);
+            $run_event = mysqli_query($con,"select * from nevent order by event_id desc");
             $i=1;
             while($row_event = mysqli_fetch_array($run_event))
             {

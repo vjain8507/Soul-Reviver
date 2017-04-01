@@ -113,12 +113,10 @@
 		}
 		else
 		{
-			$insert_contact = "insert into contact (contact_name,contact_email,contact_mobile,contact_age,contact_subject,contact_message) values ('$contact_name','$contact_email','$contact_mobile','$contact_age','$contact_subject','$contact_message')";
-			mysqli_query($con,$insert_contact);
+			mysqli_query($con,"insert into contact (contact_name,contact_email,contact_mobile,contact_age,contact_subject,contact_message) values ('$contact_name','$contact_email','$contact_mobile','$contact_age','$contact_subject','$contact_message')");
             send_to_contact($contact_name,$contact_email);
             send_to_admin($contact_name,$contact_email,$contact_mobile,$contact_age,$contact_subject,$contact_message);
-            echo "<script>alert('Thank You, We Will Contact You Soon.')</script>";
-            echo "<script>window.open('./?contact','_self')</script>";
+            echo "<script>alert('Thank You, We Will Contact You Soon.')</script><script>window.open('./?contact','_self')</script>";
         }
     }
 ?>

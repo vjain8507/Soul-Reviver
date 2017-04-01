@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $get_team = "select * from team where id='$edit_id'";
-        $run_team = mysqli_query($con,$get_team);
+        $run_team = mysqli_query($con,"select * from team where id='$edit_id'");
         while($row_team = mysqli_fetch_array($run_team))
         {
             $id = $row_team['id'];
@@ -28,9 +26,7 @@
                         <select class="mdl-selectfield__select" id="section" name="section">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            include("connect.php");
-                            $get_section = "select * from section";
-                            $run_section = mysqli_query($con,$get_section);
+                            $run_section = mysqli_query($con,"select * from section");
                             $i=1;
                             while($row_section = mysqli_fetch_array($run_section))
                             {
@@ -104,7 +100,6 @@
     <?php
 	if(isset($_POST['edit_team']))
 	{
-        include("connect.php");
         $edit_id = $_GET['ev'];
         $section_name = $_POST['section'];
         $post = $_POST['post'];
@@ -125,10 +120,8 @@
             $section_id = $section['section_id'];
             $newname = "$edit_id.$ext";
             move_uploaded_file($image_tmp,"../../image/team/$newname");
-            $update_team = "update team set section_id='$section_id', section_name='$section_name', post='$post', name='$name', image='$newname', email='$email', mobile='$mobile' where id='$edit_id'";
-			mysqli_query($con,$update_team);
-			echo "<script>alert('Team Member Has Been Edited Successfully.')</script>";
-			echo "<script>window.open('./home.php?team','_self')</script>";
+			mysqli_query($con,"update team set section_id='$section_id', section_name='$section_name', post='$post', name='$name', image='$newname', email='$email', mobile='$mobile' where id='$edit_id'");
+			echo "<script>alert('Team Member Has Been Edited Successfully.')</script><script>window.open('./home.php?team','_self')</script>";
 		}
 	}
 ?>

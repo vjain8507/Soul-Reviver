@@ -1,10 +1,8 @@
 <?php
-    include("connect.php");
     if(isset($_GET['ev']))
     {
         $edit_id = $_GET['ev'];
-        $select_cat = "select * from cat where cat_id='$edit_id'";
-        $run_query = mysqli_query($con,$select_cat);
+        $run_query = mysqli_query($con,"select * from cat where cat_id='$edit_id'");
         while($row_cat = mysqli_fetch_array($run_query))
         {
             $cat_id = $row_cat['cat_id'];
@@ -43,8 +41,7 @@
 		{
 			mysqli_query($con,"update cat set cat_name='$cat_name' where cat_id='$update_id'");
             mysqli_query($con,"update post set cat_name='$cat_name' where cat_id='$update_id'");
-			echo "<script>alert('Category Has Been Updated')</script>";
-			echo "<script>window.open('./home.php?category','_self')</script>";
+			echo "<script>alert('Category Has Been Updated')</script><script>window.open('./home.php?category','_self')</script>";
 		}
 	}
 ?>

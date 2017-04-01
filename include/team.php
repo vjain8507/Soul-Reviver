@@ -1,19 +1,18 @@
 <section class="team">
     <div class="container">
-        <div class="who"><h1 class="title"><span>Our Team</span></h1></div>
+        <div class="who">
+            <h1 class="title"><span>Our Team</span></h1>
+        </div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <?php
-                    include("include/connect.php");
-                    $get_section = "select * from section";
-                    $run_section = mysqli_query($con,$get_section);
+                    $run_section = mysqli_query($con,"select * from section");
                     while($row_section = mysqli_fetch_array($run_section))
                     {
                         $section_id = $row_section['section_id'];
                         $section_name = $row_section['section_name'];
                         echo "<div class='col-lg-12'><h3 class='description'>$section_name</h3><div class='row pt-md'>";
-                        $get_team = "select * from team where section_id = $section_id";
-                        $run_team = mysqli_query($con,$get_team);
+                        $run_team =mysqli_query($con,"select * from team where section_id='$section_id'");
                         while($row_team = mysqli_fetch_array($run_team))
                         {
                             $section_id = $row_team['section_id'];

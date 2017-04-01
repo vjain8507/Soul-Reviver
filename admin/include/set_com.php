@@ -1,5 +1,4 @@
 <?php
-    include("connect.php");
     if(isset($_GET['c']))
 	{
 		$set_id = $_GET['c'];

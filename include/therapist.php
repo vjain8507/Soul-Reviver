@@ -1,23 +1,16 @@
-<?php include("include/connect.php"); ?>
 <div class="container">
     <?php
         if(!isset($_SESSION['username']))
-        {
-            echo "<div id='tabs' class='tabs'><div class='who'><h1 class='title'><span>Find Therapist</span></h1></div></div>";
-            echo "<p class='tabd'><a href='./?signin'>Sign In</a> Or <a href='./?signup'>Sign Up</a> To Continue.</p>";
-        }
+            echo "<div id='tabs' class='tabs'><div class='who'><h1 class='title'><span>Find Therapist</span></h1></div></div><p class='tabd'><a href='./?signin'>Sign In</a> Or <a href='./?signup'>Sign Up</a> To Continue.</p>";
         else if(isset($_GET['c']) && isset($_GET['p']))
         {
             $city = $_GET['c'];
             $position = $_GET['p'];
-            $get_pos = "select * from position where position_id = $position";
-            $run_pos = mysqli_query($con,$get_pos);
-            $row_pos = mysqli_fetch_array($run_pos);
+            $row_pos = mysqli_fetch_array(mysqli_query($con,"select * from position where position_id='$position'"));
             $rpos = $row_pos['position_name'];
             echo "<div class='who' style='padding-top:120px;'><h1 class='title'><span>$rpos</span></h1></div><div class='row'>";
             include("include/button.php");
-            $get_therapist = "select * from therapist where city_id = $city and position_id = $position";
-            $run_therapist = mysqli_query($con,$get_therapist);
+            $run_therapist = mysqli_query($con,"select * from therapist where city_id='$city' and position_id='$position'");
             while($row_therapist = mysqli_fetch_array($run_therapist))
             {
                 $name = $row_therapist['name'];
@@ -32,8 +25,7 @@
         else
         {
             echo "<div id='tabs' class='tabs'><div class='who'><h1 class='title'><span>Find Therapist</span></h1></div><nav><ul>";
-            $get_city = "select * from city";
-            $run_city = mysqli_query($con,$get_city);
+            $run_city = mysqli_query($con,"select * from city");
             while($row_city = mysqli_fetch_array($run_city))
             {
                 $city_id = $row_city['city_id'];
@@ -41,15 +33,13 @@
                 echo "<li><a href='section$city_id'><span>$city_name</span></a></li>";
             }
             echo "</ul></nav><div class='content'>";
-            $get_city1 = "select * from city";
-            $run_city1 = mysqli_query($con,$get_city1);
+            $run_city1 = mysqli_query($con,"select * from city");
             while($row_city1 = mysqli_fetch_array($run_city1))
             {
                 $cityid = $row_city1['city_id'];
                 $cityname = $row_city1['city_name'];
                 echo "<section id='section$cityid'><div class='row'>";
-                $get_position = "select * from position where city_id = $cityid";
-                $run_position = mysqli_query($con,$get_position);
+                $run_position = mysqli_query($con,"select * from position where city_id='$cityid'");
                 while($row_position = mysqli_fetch_array($run_position))
                 {
                     $position_id = $row_position['position_id'];

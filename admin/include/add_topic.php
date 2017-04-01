@@ -58,7 +58,6 @@
 <?php
 	if(isset($_POST['add_topic']))
 	{
-        include("connect.php");
         $heading = $_POST['title'];
         $info = pathinfo($_FILES['image']['name']);
         $ext = $info['extension'];
@@ -73,16 +72,13 @@
 		}
 		else
 		{
-			$insert_topic = "insert into ttopic (heading,author,date,content) values ('$heading','$author','$date','$content')";
-			mysqli_query($con,$insert_topic);
+			mysqli_query($con,"insert into ttopic (heading,author,date,content) values ('$heading','$author','$date','$content')");
             $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT sno FROM ttopic ORDER BY sno DESC LIMIT 1"));
             $get_sno = $last_sno['sno'];
             $newname = "$get_sno.$ext";
             move_uploaded_file($image_tmp,"../../image/ttopics/$newname");
-            $update_topic = "update ttopic set image='$newname' where sno='$get_sno'";
-			mysqli_query($con,$update_topic);
-			echo "<script>alert('Topic Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?ttopics','_self')</script>";
+			mysqli_query($con,"update ttopic set image='$newname' where sno='$get_sno'");
+			echo "<script>alert('Topic Has Been Added Successfully')</script><script>window.open('./home.php?ttopics','_self')</script>";
 		}
 	}
 ?>

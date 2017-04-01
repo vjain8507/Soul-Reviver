@@ -16,7 +16,6 @@
     </table>
 </form>
 <?php
-    include("connect.php");
 	if(isset($_POST['add_city']))
 	{
         $city_name = $_POST['city'];
@@ -27,10 +26,8 @@
 		}
 		else
 		{
-			$insert_city = "insert into city (city_name) values ('$city_name')";
-			mysqli_query($con,$insert_city);
-			echo "<script>alert('City Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?city','_self')</script>";
+			mysqli_query($con,"insert into city (city_name) values ('$city_name')");
+			echo "<script>alert('City Has Been Added Successfully.')</script><script>window.open('./home.php?city','_self')</script>";
 		}
 	}
 ?>

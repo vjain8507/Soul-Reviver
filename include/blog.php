@@ -62,7 +62,6 @@
         background-color: #CCCCCC;
         border-radius: 0 !important;
     }
-
 </style>
 <div class="blog">
     <div class="who">
@@ -70,17 +69,15 @@
     </div>
     <div class="container">
         <?php
-            include("include/connect.php");
             include("include/functions.php");
-            if(mysqli_num_rows(mysqli_query($con,"select * from nevent order by event_id desc")) != 0)
+            $run_event = mysqli_query($con,"select * from post");
+            if(mysqli_num_rows($run_event) != 0)
             {
                 if(isset($_GET['cat']))
                 {
                     $cat = $_GET['cat'];
                     $results_per_page = 5;
-                    $sql='SELECT * FROM post';
-                    $result = mysqli_query($con, $sql);
-                    $number_of_results = mysqli_num_rows($result);
+                    $number_of_results = mysqli_num_rows(mysqli_query($con,"select * from post"));
                     $number_of_pages = ceil($number_of_results/$results_per_page);
                     if (!isset($_GET['page']))
                         $page = 1;
@@ -88,9 +85,8 @@
                         $page = $_GET['page'];
                     $this_page_first_result = ($page-1)*$results_per_page;
                     echo "<div class='col-md-8 blog-left'>";
-                    $get_posts = "select * from post where cat_id = $cat order by post_id desc LIMIT $this_page_first_result,$results_per_page";
-                    $run_posts = mysqli_query($con,$get_posts);
-                    while($row_post = mysqli_fetch_array($run_posts))
+                    $run_post = mysqli_query($con,"select * from post where cat_id = $cat order by post_id desc limit $this_page_first_result,$results_per_page");
+                    while($row_post = mysqli_fetch_array($run_post))
                     {
                         $post_id = $row_post['post_id'];
                         $cat_name = $row_post['cat_name'];
@@ -99,9 +95,7 @@
                         $post_author = $row_post['post_author'];
                         $post_image = $row_post['post_image'];
                         $post_content = word_count($row_post['post_data'],50);
-                        $get_com = "select * from com where com_post=$post_id and approve='yes' order by com_id desc";
-                        $run_com = mysqli_query($con,$get_com);
-                        $count_com = mysqli_num_rows($run_com);
+                        $count_com = mysqli_num_rows(mysqli_query($con,"select * from com where com_post=$post_id and approve='yes' order by com_id desc"));
                         echo "<div class='blog-info'><hr><h4 style='text-align:center;margin:0px;'><a href='./?blog&p=$post_id'>$post_title</a></h4><p style='text-align:center;'><b>Posted By</b> $post_author <b>On</b> $post_date <b>Comments (</b>$count_com<b>)</b><hr></p><div class='blog-info-text'><div class='blog-img' style='text-align:center;'><img src='./image/post/$post_image' style='height:200px;padding-bottom:20px;' alt='$post_image'/></a></div><p class='snglp' style='text-align:justify;'>$post_content ... <b><a href='./?blog&p=$post_id'>Read More</a></b></p></div></div>";	
                     }
                     if($number_of_pages<=$results_per_page){}
@@ -132,8 +126,7 @@
                         echo "</ul></nav>";
                     }
                     echo "</div><div class='col-md-4 single-page-right'><div class='category blog-ctgry'><h4>Categories</h4><div class='list-group'>";
-                    $get_cat = "select * from cat";
-                    $run_cat = mysqli_query($con,$get_cat);
+                    $run_cat = mysqli_query($con,"select * from cat");
                     while($row_cat = mysqli_fetch_array($run_cat))
                     {
                         $cat_id = $row_cat['cat_id'];
@@ -145,9 +138,8 @@
                 else if(isset($_GET['p']))
                 {
                     $post = $_GET['p'];
-                    $get_posts = "select * from post where post_id = $post";
-                    $run_posts = mysqli_query($con,$get_posts);
-                    while($row_post = mysqli_fetch_array($run_posts))
+                    $run_post = mysqli_query($con,"select * from post where post_id='$post'");
+                    while($row_post = mysqli_fetch_array($run_post))
                     {
                         $post_id = $row_post['post_id'];
                         $post_title = $row_post['post_title'];
@@ -155,12 +147,9 @@
                         $post_author = $row_post['post_author'];
                         $post_image = $row_post['post_image'];
                         $post_data = $row_post['post_data'];
-                        $get_com = "select * from com where com_post=$post_id and approve='yes' order by com_id desc";
-                        $run_com = mysqli_query($con,$get_com);
-                        $count_com = mysqli_num_rows($run_com);
+                        $count_com = mysqli_num_rows(mysqli_query($con,"select * from com where com_post=$post_id and approve='yes' order by com_id desc"));
                         echo "<div class='col-md-8 single-page-left'><div class='single-page-info'><h1 style='margin-bottom:-50px;'>$post_title</h1><div class='comment-icons'><ul><li><span class='glyphicon glyphicon-user'></span>$post_author</li><li><span class='glyphicon glyphicon-calendar'></span>$post_date</li><li><span class='glyphicon glyphicon-send'></span>Comments ($count_com)</li></ul></div><img style='margin-top:-40px;' src='image/post/$post_image' alt='$post_image'/><p style='margin-top:20px;text-align:justify;'>$post_data</p></div><div class='coment-form'><hr><h4>Leave Your Comment</h4><hr></div><form action='./?blog&p=$post' method='post' enctype='multipart/form-data'><table class='coment-data'><tr><td>Name</td><td><input type='text' name='name' required></td></tr><tr><td>Email</td><td><input type='email' name='email' required></td></tr><tr><td>Your Comment</td><td><textarea rows='5' name='comment' required></textarea></td></tr><tr><td colspan='2'><input type='submit' name='submit' value='Submit'></td></tr></table></form><div class='response'><hr><h4>Comments</h4><hr>";
-                        $get_com = "select * from com where com_post=$post and approve='yes' order by com_id desc";
-                        $run_com = mysqli_query($con,$get_com);
+                        $run_com = mysqli_query($con,"select * from com where com_post='$post' and approve='yes' order by com_id desc");
                         while($row_com = mysqli_fetch_array($run_com))
                         {
                             $com_msg = $row_com['com_msg'];
@@ -171,8 +160,7 @@
                         echo "</div></div>";
                     }
                     echo "<div class='col-md-4 single-page-right'><div class='category blog-ctgry'><h4>Categories</h4><div class='list-group'>";
-                    $get_cat = "select * from cat";
-                    $run_cat = mysqli_query($con,$get_cat);
+                    $run_cat = mysqli_query($con,"select * from cat");
                     while($row_cat = mysqli_fetch_array($run_cat))
                     {
                         $cat_id = $row_cat['cat_id'];
@@ -186,7 +174,6 @@
                         $name=$_POST['name'];
                         $email=$_POST['email'];
                         $comment=$_POST['comment'];
-                        date_default_timezone_set('Asia/Kolkata');
                         $date=(string)date('F d, Y \@ h:i:s A');
                         if($name=='' OR $email=='' OR $comment=='')
                         {
@@ -195,8 +182,7 @@
                         }
                         else
                         {
-                            $insert_com = "insert into com (com_post,com_msg,com_name,com_email,com_date,approve) values ('$post','$comment','$name','$email','$date','no')";
-                            mysqli_query($con,$insert_com);
+                            mysqli_query($con,"insert into com (com_post,com_msg,com_name,com_email,com_date,approve) values ('$post','$comment','$name','$email','$date','no')");
                             echo "<script>alert('Comment Will Be Added After Review.')</script>";
                             echo "<script>window.open('./?blog&p=$post','_self')</script>";
                         }
@@ -205,9 +191,7 @@
                 else
                 {
                     $results_per_page = 5;
-                    $sql='SELECT * FROM post';
-                    $result = mysqli_query($con, $sql);
-                    $number_of_results = mysqli_num_rows($result);
+                    $number_of_results = mysqli_num_rows(mysqli_query($con,"select * from post"));
                     $number_of_pages = ceil($number_of_results/$results_per_page);
                     if (!isset($_GET['page']))
                         $page = 1;
@@ -215,9 +199,8 @@
                         $page = $_GET['page'];
                     $this_page_first_result = ($page-1)*$results_per_page;
                     echo "<div class='col-md-8 blog-left'>";
-                    $get_posts = "select * from post order by post_id desc LIMIT $this_page_first_result,$results_per_page";
-                    $run_posts = mysqli_query($con,$get_posts);
-                    while($row_post = mysqli_fetch_array($run_posts))
+                    $run_post = mysqli_query($con,"select * from post order by post_id desc limit $this_page_first_result,$results_per_page");
+                    while($row_post = mysqli_fetch_array($run_post))
                     {
                         $post_id = $row_post['post_id'];
                         $cat_name = $row_post['cat_name'];
@@ -226,9 +209,7 @@
                         $post_author = $row_post['post_author'];
                         $post_image = $row_post['post_image'];
                         $post_content = word_count($row_post['post_data'],50);
-                        $get_com = "select * from com where com_post=$post_id and approve='yes' order by com_id desc";
-                        $run_com = mysqli_query($con,$get_com);
-                        $count_com = mysqli_num_rows($run_com);
+                        $count_com = mysqli_num_rows(mysqli_query($con,"select * from com where com_post='$post_id' and approve='yes' order by com_id desc"));
                         echo "<div class='blog-info'><hr><h4 style='text-align:center;margin:0px;'><a href='./?blog&p=$post_id'>$post_title</a></h4><p style='text-align:center;'><b>Posted By</b> $post_author <b>On</b> $post_date <b>Comments (</b>$count_com<b>)</b><hr></p><div class='blog-info-text'><div class='blog-img' style='text-align:center;'><img src='./image/post/$post_image' style='height:200px;padding-bottom:20px;' alt='$post_image'/></a></div><p class='snglp' style='text-align:justify;'>$post_content ... <b><a href='./?blog&p=$post_id'>Read More</a></b></p></div></div>";
                     }
                     if($number_of_pages<=$results_per_page){}
@@ -259,8 +240,7 @@
                         echo "</ul></nav>";
                     }
                     echo "</div><div class='col-md-4 single-page-right'><div class='category blog-ctgry'><h4>Categories</h4><div class='list-group'>";
-                    $get_cat = "select * from cat";
-                    $run_cat = mysqli_query($con,$get_cat);
+                    $run_cat = mysqli_query($con,"select * from cat");
                     while($row_cat = mysqli_fetch_array($run_cat))
                     {
                         $cat_id = $row_cat['cat_id'];
@@ -271,9 +251,7 @@
                 }
             }
             else
-            {
                 echo "<p class='tabd'>No Blog Post Yet...</p>";
-            }
         ?>
     </div>
 </div>

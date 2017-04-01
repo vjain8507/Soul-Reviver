@@ -9,9 +9,7 @@
                     <select class="mdl-selectfield__select" id="section" name="section">
                         <option selected disabled hidden>Select</option>
                         <?php
-                            include("connect.php");
-                            $get_section = "select * from section";
-                            $run_section = mysqli_query($con,$get_section);
+                            $run_section = mysqli_query($con,"select * from section");
                             $i=1;
                             while($row_section = mysqli_fetch_array($run_section))
                             {
@@ -99,16 +97,13 @@
 		{
             $section = mysqli_fetch_array(mysqli_query($con,"select section_id from section where section_name='$section_name'"));
             $section_id = $section['section_id'];
-            $insert_team = "insert into team (section_id,section_name,post,name,email,mobile) values ('$section_id','$section_name','$post','$name','$email','$mobile')";
-			mysqli_query($con,$insert_team);
+			mysqli_query($con,"insert into team (section_id,section_name,post,name,email,mobile) values ('$section_id','$section_name','$post','$name','$email','$mobile')");
             $last_sno = mysqli_fetch_array(mysqli_query($con,"SELECT id FROM team ORDER BY id DESC LIMIT 1"));
             $get_sno = $last_sno['id'];
             $newname = "$get_sno.$ext";
             move_uploaded_file($image_tmp,"../../image/team/$newname");
-            $update_team = "update team set image='$newname' where id='$get_sno'";
-			mysqli_query($con,$update_team);
-			echo "<script>alert('Team Member Has Been Added Successfully')</script>";
-			echo "<script>window.open('./home.php?team','_self')</script>";
+			mysqli_query($con,"update team set image='$newname' where id='$get_sno'");
+			echo "<script>alert('Team Member Has Been Added Successfully')</script><script>window.open('./home.php?team','_self')</script>";
 		}
 	}
 ?>
