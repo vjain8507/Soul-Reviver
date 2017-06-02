@@ -62,6 +62,13 @@
         background-color: #CCCCCC;
         border-radius: 0 !important;
     }
+    p, li{
+        text-align:justify;
+        font-size:18px;
+    }
+    li{
+        font-family: 'Cormorant Garamond'!important;
+    }
 </style>
 <div class="blog">
     <div class="who">
@@ -148,7 +155,7 @@
                         $post_image = $row_post['post_image'];
                         $post_data = $row_post['post_data'];
                         $count_com = mysqli_num_rows(mysqli_query($con,"select * from com where com_post=$post_id and approve='yes' order by com_id desc"));
-                        echo "<div class='col-md-8 single-page-left'><div class='single-page-info'><h1 style='margin-bottom:-50px;'>$post_title</h1><div class='comment-icons'><ul><li><span class='glyphicon glyphicon-user'></span>$post_author</li><li><span class='glyphicon glyphicon-calendar'></span>$post_date</li><li><span class='glyphicon glyphicon-send'></span>Comments ($count_com)</li></ul></div><img style='margin-top:-40px;' src='image/post/$post_image' alt='$post_image'/><p style='margin-top:20px;text-align:justify;'>$post_data</p></div><div class='coment-form'><hr><h4>Leave Your Comment</h4><hr></div><form action='./?blog&p=$post' method='post' enctype='multipart/form-data'><table class='coment-data'><tr><td>Name</td><td><input type='text' name='name' required></td></tr><tr><td>Email</td><td><input type='email' name='email' required></td></tr><tr><td>Your Comment</td><td><textarea rows='5' name='comment' required></textarea></td></tr><tr><td colspan='2'><input type='submit' name='submit' value='Submit'></td></tr></table></form><div class='response'><hr><h4>Comments</h4><hr>";
+                        echo "<div class='col-md-8 single-page-left'><div class='single-page-info'><h1 style='margin-bottom:-50px;'>$post_title</h1><div class='comment-icons'><ul><li><span class='glyphicon glyphicon-user'></span>$post_author</li><li><span class='glyphicon glyphicon-calendar'></span>$post_date</li><li><span class='glyphicon glyphicon-send'></span>Comments ($count_com)</li></ul></div><img style='margin-top:-40px;' src='image/post/$post_image' alt='$post_image'/><p style='margin-top:20px;'>$post_data</p></div><div class='coment-form'><hr><h4>Leave Your Comment</h4><hr></div><form action='./?blog&p=$post' method='post' enctype='multipart/form-data'><table class='coment-data'><tr><td>Name</td><td><input type='text' name='name' required></td></tr><tr><td>Email</td><td><input type='email' name='email' required></td></tr><tr><td>Your Comment</td><td><textarea rows='5' name='comment' required></textarea></td></tr><tr><td colspan='2'><input type='submit' name='submit' value='Submit'></td></tr></table></form><div class='response'><hr><h4>Comments</h4><hr>";
                         $run_com = mysqli_query($con,"select * from com where com_post='$post' and approve='yes' order by com_id desc");
                         while($row_com = mysqli_fetch_array($run_com))
                         {

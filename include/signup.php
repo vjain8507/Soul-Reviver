@@ -55,6 +55,7 @@
         width: auto;
         display: inline-block;
         float: left;
+        margin-right:10px;
     }
     
     .input-group-addon {
@@ -98,9 +99,7 @@
                         <table>
                             <tr>
                                 <td>SELECT PLAN</td>
-                                <td>
-                                    <input type="radio" name="plan" value="Member">&nbsp;&nbsp;Member<br><input type="radio" name="plan" value="Non Member" checked>&nbsp;&nbsp;Non Member
-                                </td>
+                                <td><input type="radio" name="plan" value="Member">&nbsp;&nbsp;Member<br><input type="radio" name="plan" value="Non Member" checked>&nbsp;&nbsp;Non Member</td>
                             </tr>
                             <tr>
                                 <td>NAME</td>
@@ -108,9 +107,7 @@
                             </tr>
                             <tr>
                                 <td>GENDER</td>
-                                <td>
-                                    <input type="radio" name="gender" value="Male">&nbsp;&nbsp;Male<br><input type="radio" name="gender" value="Female">&nbsp;&nbsp;Female<br><input type="radio" name="gender" value="Other">&nbsp;&nbsp;Other
-                                </td>
+                                <td><input type="radio" name="gender" value="Male">&nbsp;&nbsp;Male<br><input type="radio" name="gender" value="Female">&nbsp;&nbsp;Female<br><input type="radio" name="gender" value="Other">&nbsp;&nbsp;Other</td>
                             </tr>
                             <tr>
                                 <td>EMAIL ADDRESS</td>
@@ -118,9 +115,7 @@
                             </tr>
                             <tr>
                                 <td>MOBILE NUMBER</td>
-                                <td>
-                                    <div class="input-group"><span class="input-group-addon">+91</span><input name="mobile" type="tel" required></div>
-                                </td>
+                                <td><div class="input-group"><span class="input-group-addon">+91</span><input name="mobile" type="tel" required></div></td>
                             </tr>
                             <tr>
                                 <td>ADDRESS</td>
@@ -147,7 +142,11 @@
                                 <td><input name="cpassword" type="password" id="cpassword"></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><button name="submit" id="submit" type="submit" class="btn btn-info btn-block">SUBMIT</button></td>
+                                <td></td>
+                                <td><input type="checkbox" onchange="activateButton(this)">I Accept Terms & Conditions</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><button name="submit" id="submit" type="submit" class="btn btn-info btn-block" disabled>SUBMIT</button></td>
                             </tr>
                         </table>
                     </form>

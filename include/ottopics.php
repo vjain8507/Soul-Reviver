@@ -47,7 +47,11 @@
             $author = $row_topic['author'];
             $date = $row_topic['date'];
             $content = $row_topic['content'];
-            echo "<div class='panel panel-default ttpanel'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#$sno'>$i. $heading</a></h4></div><div id='$sno' class='panel-collapse collapse'><div class='panel-body'><p style='text-align:center;'><img src='image/ttopics/$image'/></p><hr><p style='text-align:center;font-size:20px;'><i class='fa fa-user'></i>$author<i class='fa fa-calendar fae'></i>$date</p><hr><div style='text-align:justify;font-size:20px;'>$content</div></div></div></div>";
+            if(isset($_GET['s']))
+            {
+                
+            }
+            echo "<div class='panel panel-default ttpanel'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#$sno'>$i. $heading</a></h4></div><div id='$sno' class='panel-collapse collapse in'><div class='panel-body'><p style='text-align:center;'><img src='image/ttopics/$image'/></p><hr><p style='text-align:center;font-size:20px;'><i class='fa fa-user'></i>$author<i class='fa fa-calendar fae'></i>$date</p><hr><div style='text-align:justify;font-size:20px;'>$content</div></div></div></div>";
         }
         echo "</div>";
     }
